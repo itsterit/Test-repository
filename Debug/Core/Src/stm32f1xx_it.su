@@ -1,0 +1,3 @@
+../Core/Src/stm32f1xx_it.cpp:26:7:void ADC1_2_IRQHandler()	4	static
+../Core/Src/stm32f1xx_it.cpp:40:6:void TIM1_UP_IRQHandler()	4	static
+../Core/Src/stm32f1xx_it.cpp:47:6:void USART2_IRQHandler()	4	static
