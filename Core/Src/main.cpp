@@ -75,6 +75,7 @@ int main(void)
   {    
     GPIOC->ODR ^= GPIO_ODR_ODR13;
 
+    // Тут происходит какая-то хуйня и всё виснет
     USART2->SR = 0x00;
     USART2->CR1 |= USART_CR1_TCIE;
     USART2->DR = LibA[0];
