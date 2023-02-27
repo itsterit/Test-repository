@@ -44,10 +44,10 @@ void TIM1_UP_IRQHandler(void)
     TIM1->SR &= ~ TIM_SR_UIF;
 }
 
-void USART2_IRQHandler(void)
+extern "C"  void USART2_IRQHandler(void)
 {
+    USART2->DR = Lib[1];
     USART2->SR = 0x00;
-    USART2->CR1 &= ~USART_CR1_TCIE;
-
     GPIOC->ODR ^= GPIO_ODR_ODR13;
+     USART2->CR1 &= ~USART_CR1_TCIE;
 }

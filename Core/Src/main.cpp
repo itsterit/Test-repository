@@ -74,10 +74,10 @@ int main(void)
   while (1)
   {    
     GPIOC->ODR ^= GPIO_ODR_ODR13;    
-    
+
     USART2->SR = 0x00;
     USART2->CR1 |= USART_CR1_TCIE;
-    //USART2->DR = LibA[0];
+    USART2->DR = LibA[0];
 
     for (int i = 0; i != 1000000; i++)
     {

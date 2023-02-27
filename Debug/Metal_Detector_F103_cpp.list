@@ -5,45 +5,45 @@ Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
   0 .isr_vector   00000130  08000000  08000000  00010000  2**0
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  1 .text         000006f0  08000130  08000130  00010130  2**2
+  1 .text         0000073c  08000130  08000130  00010130  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       00000000  08000820  08000828  00010828  2**0
+  2 .rodata       00000000  0800086c  0800086c  00020018  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  3 .ARM.extab    00000000  08000820  08000820  00010828  2**0
+  3 .ARM.extab    00000000  0800086c  0800086c  00020018  2**0
                   CONTENTS
-  4 .ARM          00000000  08000820  08000820  00010828  2**0
+  4 .ARM          00000000  0800086c  0800086c  00020018  2**0
                   CONTENTS
-  5 .preinit_array 00000000  08000820  08000828  00010828  2**0
+  5 .preinit_array 00000000  0800086c  0800086c  00020018  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .init_array   00000004  08000820  08000820  00010820  2**2
+  6 .init_array   00000004  0800086c  0800086c  0001086c  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  7 .fini_array   00000004  08000824  08000824  00010824  2**2
+  7 .fini_array   00000004  08000870  08000870  00010870  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  8 .data         00000000  20000000  20000000  00010828  2**0
+  8 .data         00000018  20000000  08000874  00020000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          0000001c  20000000  08000828  00020000  2**2
+  9 .bss          0000001c  20000018  0800088c  00020018  2**2
                   ALLOC
- 10 ._user_heap_stack 00000604  2000001c  08000828  0002001c  2**0
+ 10 ._user_heap_stack 00000604  20000034  0800088c  00020034  2**0
                   ALLOC
- 11 .ARM.attributes 00000029  00000000  00000000  00010828  2**0
+ 11 .ARM.attributes 00000029  00000000  00000000  00020018  2**0
                   CONTENTS, READONLY
- 12 .debug_info   000015c5  00000000  00000000  00010851  2**0
+ 12 .debug_info   00001aa6  00000000  00000000  00020041  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00000753  00000000  00000000  00011e16  2**0
+ 13 .debug_abbrev 000008a3  00000000  00000000  00021ae7  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 000001c0  00000000  00000000  00012570  2**3
+ 14 .debug_aranges 000001f0  00000000  00000000  00022390  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_ranges 00000178  00000000  00000000  00012730  2**3
+ 15 .debug_ranges 00000198  00000000  00000000  00022580  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00011f37  00000000  00000000  000128a8  2**0
+ 16 .debug_macro  00012196  00000000  00000000  00022718  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00001d68  00000000  00000000  000247df  2**0
+ 17 .debug_line   0000247b  00000000  00000000  000348ae  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    00059645  00000000  00000000  00026547  2**0
+ 18 .debug_str    000596ea  00000000  00000000  00036d29  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000050  00000000  00000000  0007fb8c  2**0
+ 19 .comment      00000050  00000000  00000000  00090413  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  000005c0  00000000  00000000  0007fbdc  2**2
+ 20 .debug_frame  00000630  00000000  00000000  00090464  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -60,9 +60,9 @@ Disassembly of section .text:
  8000142:	2301      	movs	r3, #1
  8000144:	7023      	strb	r3, [r4, #0]
  8000146:	bd10      	pop	{r4, pc}
- 8000148:	20000000 	.word	0x20000000
+ 8000148:	20000018 	.word	0x20000018
  800014c:	00000000 	.word	0x00000000
- 8000150:	08000808 	.word	0x08000808
+ 8000150:	08000854 	.word	0x08000854
 
 08000154 <frame_dummy>:
  8000154:	b508      	push	{r3, lr}
@@ -73,8 +73,8 @@ Disassembly of section .text:
  800015e:	f3af 8000 	nop.w
  8000162:	bd08      	pop	{r3, pc}
  8000164:	00000000 	.word	0x00000000
- 8000168:	20000004 	.word	0x20000004
- 800016c:	08000808 	.word	0x08000808
+ 8000168:	2000001c 	.word	0x2000001c
+ 800016c:	08000854 	.word	0x08000854
 
 08000170 <__NVIC_EnableIRQ>:
   \details Enables a device specific interrupt in the NVIC interrupt controller.
@@ -283,23 +283,23 @@ int main(void)
    * @details HSE not divided for PLL entry
    */
   ClockControl::HSE::Start_HSE();
- 800029e:	f000 f9c1 	bl	8000624 <_ZN12ClockControl3HSE9Start_HSEEv>
+ 800029e:	f000 f9e7 	bl	8000670 <_ZN12ClockControl3HSE9Start_HSEEv>
   ClockControl::HSE::PLL::Clean_PLLXTPRE();
- 80002a2:	f000 f9f7 	bl	8000694 <_ZN12ClockControl3HSE3PLL14Clean_PLLXTPREEv>
+ 80002a2:	f000 fa1d 	bl	80006e0 <_ZN12ClockControl3HSE3PLL14Clean_PLLXTPREEv>
    * @brief   PLL clocking from HSE
    *          Set PLL as system clock
    * @details Written only when PLL is disabled
    * @details On successful launch pll returns 1
    */
   ClockControl::HSE::PLL::Set_PLLSRC_HSE();
- 80002a6:	f000 f9e7 	bl	8000678 <_ZN12ClockControl3HSE3PLL14Set_PLLSRC_HSEEv>
+ 80002a6:	f000 fa0d 	bl	80006c4 <_ZN12ClockControl3HSE3PLL14Set_PLLSRC_HSEEv>
   ClockControl::HSE::PLL::Set_PLL_MUL(6);
  80002aa:	2006      	movs	r0, #6
- 80002ac:	f000 f9fe 	bl	80006ac <_ZN12ClockControl3HSE3PLL11Set_PLL_MULEt>
+ 80002ac:	f000 fa24 	bl	80006f8 <_ZN12ClockControl3HSE3PLL11Set_PLL_MULEt>
   ClockControl::HSE::PLL::Start_PLL();
- 80002b0:	f000 fa24 	bl	80006fc <_ZN12ClockControl3HSE3PLL9Start_PLLEv>
+ 80002b0:	f000 fa4a 	bl	8000748 <_ZN12ClockControl3HSE3PLL9Start_PLLEv>
   ClockControl::HSE::PLL::Set_SW_PLL();
- 80002b4:	f000 fa4c 	bl	8000750 <_ZN12ClockControl3HSE3PLL10Set_SW_PLLEv>
+ 80002b4:	f000 fa72 	bl	800079c <_ZN12ClockControl3HSE3PLL10Set_SW_PLLEv>
    * @details APB1 timers                   - 48Mhz
    * @details APB2 peripherals              - 48Mhz
    * @details APB1 timers                   - 48Mhz
@@ -307,21 +307,21 @@ int main(void)
    */
   ClockControl::Set_AHB_Prescaler(1);
  80002b8:	2001      	movs	r0, #1
- 80002ba:	f000 f839 	bl	8000330 <_ZN12ClockControl17Set_AHB_PrescalerEt>
+ 80002ba:	f000 f85f 	bl	800037c <_ZN12ClockControl17Set_AHB_PrescalerEt>
   ClockControl::Set_APB1_Prescaler(2);
  80002be:	2002      	movs	r0, #2
- 80002c0:	f000 f8bc 	bl	800043c <_ZN12ClockControl18Set_APB1_PrescalerEt>
+ 80002c0:	f000 f8e2 	bl	8000488 <_ZN12ClockControl18Set_APB1_PrescalerEt>
   ClockControl::Set_APB2_Prescaler(1);
  80002c4:	2001      	movs	r0, #1
- 80002c6:	f000 f913 	bl	80004f0 <_ZN12ClockControl18Set_APB2_PrescalerEt>
+ 80002c6:	f000 f939 	bl	800053c <_ZN12ClockControl18Set_APB2_PrescalerEt>
   ClockControl::Set_ADC_Prescaler(4);
  80002ca:	2004      	movs	r0, #4
- 80002cc:	f000 f96a 	bl	80005a4 <_ZN12ClockControl17Set_ADC_PrescalerEt>
+ 80002cc:	f000 f990 	bl	80005f0 <_ZN12ClockControl17Set_ADC_PrescalerEt>
 
   Uart2_Ini(USART2, 24000000, 9600);
  80002d0:	f44f 5216 	mov.w	r2, #9600	; 0x2580
- 80002d4:	490f      	ldr	r1, [pc, #60]	; (8000314 <main+0x7c>)
- 80002d6:	4810      	ldr	r0, [pc, #64]	; (8000318 <main+0x80>)
+ 80002d4:	4911      	ldr	r1, [pc, #68]	; (800031c <main+0x84>)
+ 80002d6:	4812      	ldr	r0, [pc, #72]	; (8000320 <main+0x88>)
  80002d8:	f7ff ff66 	bl	80001a8 <_Z9Uart2_IniP13USART_TypeDefli>
 
   PinSet();
@@ -330,843 +330,888 @@ int main(void)
   while (1)
   {    
     GPIOC->ODR ^= GPIO_ODR_ODR13;    
- 80002e0:	4b0e      	ldr	r3, [pc, #56]	; (800031c <main+0x84>)
+ 80002e0:	4b10      	ldr	r3, [pc, #64]	; (8000324 <main+0x8c>)
  80002e2:	68db      	ldr	r3, [r3, #12]
- 80002e4:	4a0d      	ldr	r2, [pc, #52]	; (800031c <main+0x84>)
+ 80002e4:	4a0f      	ldr	r2, [pc, #60]	; (8000324 <main+0x8c>)
  80002e6:	f483 5300 	eor.w	r3, r3, #8192	; 0x2000
  80002ea:	60d3      	str	r3, [r2, #12]
-    
+
     USART2->SR = 0x00;
- 80002ec:	4b0a      	ldr	r3, [pc, #40]	; (8000318 <main+0x80>)
+ 80002ec:	4b0c      	ldr	r3, [pc, #48]	; (8000320 <main+0x88>)
  80002ee:	2200      	movs	r2, #0
  80002f0:	601a      	str	r2, [r3, #0]
     USART2->CR1 |= USART_CR1_TCIE;
- 80002f2:	4b09      	ldr	r3, [pc, #36]	; (8000318 <main+0x80>)
+ 80002f2:	4b0b      	ldr	r3, [pc, #44]	; (8000320 <main+0x88>)
  80002f4:	68db      	ldr	r3, [r3, #12]
- 80002f6:	4a08      	ldr	r2, [pc, #32]	; (8000318 <main+0x80>)
+ 80002f6:	4a0a      	ldr	r2, [pc, #40]	; (8000320 <main+0x88>)
  80002f8:	f043 0340 	orr.w	r3, r3, #64	; 0x40
  80002fc:	60d3      	str	r3, [r2, #12]
-    //USART2->DR = LibA[0];
+    USART2->DR = LibA[0];
+ 80002fe:	4b0a      	ldr	r3, [pc, #40]	; (8000328 <main+0x90>)
+ 8000300:	781a      	ldrb	r2, [r3, #0]
+ 8000302:	4b07      	ldr	r3, [pc, #28]	; (8000320 <main+0x88>)
+ 8000304:	605a      	str	r2, [r3, #4]
 
     for (int i = 0; i != 1000000; i++)
- 80002fe:	2300      	movs	r3, #0
- 8000300:	607b      	str	r3, [r7, #4]
- 8000302:	687b      	ldr	r3, [r7, #4]
- 8000304:	4a06      	ldr	r2, [pc, #24]	; (8000320 <main+0x88>)
- 8000306:	4293      	cmp	r3, r2
- 8000308:	d0ea      	beq.n	80002e0 <main+0x48>
+ 8000306:	2300      	movs	r3, #0
+ 8000308:	607b      	str	r3, [r7, #4]
  800030a:	687b      	ldr	r3, [r7, #4]
- 800030c:	3301      	adds	r3, #1
- 800030e:	607b      	str	r3, [r7, #4]
- 8000310:	e7f7      	b.n	8000302 <main+0x6a>
- 8000312:	bf00      	nop
- 8000314:	016e3600 	.word	0x016e3600
- 8000318:	40004400 	.word	0x40004400
- 800031c:	40011000 	.word	0x40011000
- 8000320:	000f4240 	.word	0x000f4240
+ 800030c:	4a07      	ldr	r2, [pc, #28]	; (800032c <main+0x94>)
+ 800030e:	4293      	cmp	r3, r2
+ 8000310:	d0e6      	beq.n	80002e0 <main+0x48>
+ 8000312:	687b      	ldr	r3, [r7, #4]
+ 8000314:	3301      	adds	r3, #1
+ 8000316:	607b      	str	r3, [r7, #4]
+ 8000318:	e7f7      	b.n	800030a <main+0x72>
+ 800031a:	bf00      	nop
+ 800031c:	016e3600 	.word	0x016e3600
+ 8000320:	40004400 	.word	0x40004400
+ 8000324:	40011000 	.word	0x40011000
+ 8000328:	20000000 	.word	0x20000000
+ 800032c:	000f4240 	.word	0x000f4240
 
-08000324 <SystemInit>:
+08000330 <USART2_IRQHandler>:
+    GPIOC->ODR &= ~(GPIO_ODR_ODR13);
+    TIM1->SR &= ~ TIM_SR_UIF;
+}
+
+extern "C"  void USART2_IRQHandler(void)
+{
+ 8000330:	b480      	push	{r7}
+ 8000332:	af00      	add	r7, sp, #0
+    USART2->DR = Lib[1];
+ 8000334:	4b0b      	ldr	r3, [pc, #44]	; (8000364 <USART2_IRQHandler+0x34>)
+ 8000336:	785a      	ldrb	r2, [r3, #1]
+ 8000338:	4b0b      	ldr	r3, [pc, #44]	; (8000368 <USART2_IRQHandler+0x38>)
+ 800033a:	605a      	str	r2, [r3, #4]
+    USART2->SR = 0x00;
+ 800033c:	4b0a      	ldr	r3, [pc, #40]	; (8000368 <USART2_IRQHandler+0x38>)
+ 800033e:	2200      	movs	r2, #0
+ 8000340:	601a      	str	r2, [r3, #0]
+    GPIOC->ODR ^= GPIO_ODR_ODR13;
+ 8000342:	4b0a      	ldr	r3, [pc, #40]	; (800036c <USART2_IRQHandler+0x3c>)
+ 8000344:	68db      	ldr	r3, [r3, #12]
+ 8000346:	4a09      	ldr	r2, [pc, #36]	; (800036c <USART2_IRQHandler+0x3c>)
+ 8000348:	f483 5300 	eor.w	r3, r3, #8192	; 0x2000
+ 800034c:	60d3      	str	r3, [r2, #12]
+     USART2->CR1 &= ~USART_CR1_TCIE;
+ 800034e:	4b06      	ldr	r3, [pc, #24]	; (8000368 <USART2_IRQHandler+0x38>)
+ 8000350:	68db      	ldr	r3, [r3, #12]
+ 8000352:	4a05      	ldr	r2, [pc, #20]	; (8000368 <USART2_IRQHandler+0x38>)
+ 8000354:	f023 0340 	bic.w	r3, r3, #64	; 0x40
+ 8000358:	60d3      	str	r3, [r2, #12]
+}
+ 800035a:	bf00      	nop
+ 800035c:	46bd      	mov	sp, r7
+ 800035e:	bc80      	pop	{r7}
+ 8000360:	4770      	bx	lr
+ 8000362:	bf00      	nop
+ 8000364:	2000000c 	.word	0x2000000c
+ 8000368:	40004400 	.word	0x40004400
+ 800036c:	40011000 	.word	0x40011000
+
+08000370 <SystemInit>:
   * @note   This function should be used only after reset.
   * @param  None
   * @retval None
   */
 void SystemInit (void)
 {
- 8000324:	b480      	push	{r7}
- 8000326:	af00      	add	r7, sp, #0
+ 8000370:	b480      	push	{r7}
+ 8000372:	af00      	add	r7, sp, #0
 
   /* Configure the Vector Table location -------------------------------------*/
 #if defined(USER_VECT_TAB_ADDRESS)
   SCB->VTOR = VECT_TAB_BASE_ADDRESS | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal SRAM. */
 #endif /* USER_VECT_TAB_ADDRESS */
 }
- 8000328:	bf00      	nop
- 800032a:	46bd      	mov	sp, r7
- 800032c:	bc80      	pop	{r7}
- 800032e:	4770      	bx	lr
+ 8000374:	bf00      	nop
+ 8000376:	46bd      	mov	sp, r7
+ 8000378:	bc80      	pop	{r7}
+ 800037a:	4770      	bx	lr
 
-08000330 <_ZN12ClockControl17Set_AHB_PrescalerEt>:
+0800037c <_ZN12ClockControl17Set_AHB_PrescalerEt>:
 	 * Use default setting
 	 * 8Mhz HSI
 	 */
 }
 void ClockControl::Set_AHB_Prescaler(unsigned short AHB_Prescaler_Value)
 {
- 8000330:	b480      	push	{r7}
- 8000332:	b083      	sub	sp, #12
- 8000334:	af00      	add	r7, sp, #0
- 8000336:	4603      	mov	r3, r0
- 8000338:	80fb      	strh	r3, [r7, #6]
+ 800037c:	b480      	push	{r7}
+ 800037e:	b083      	sub	sp, #12
+ 8000380:	af00      	add	r7, sp, #0
+ 8000382:	4603      	mov	r3, r0
+ 8000384:	80fb      	strh	r3, [r7, #6]
 	switch (AHB_Prescaler_Value)
- 800033a:	88fb      	ldrh	r3, [r7, #6]
- 800033c:	f5b3 7f00 	cmp.w	r3, #512	; 0x200
- 8000340:	d068      	beq.n	8000414 <_ZN12ClockControl17Set_AHB_PrescalerEt+0xe4>
- 8000342:	f5b3 7f00 	cmp.w	r3, #512	; 0x200
- 8000346:	dc6c      	bgt.n	8000422 <_ZN12ClockControl17Set_AHB_PrescalerEt+0xf2>
- 8000348:	f5b3 7f80 	cmp.w	r3, #256	; 0x100
- 800034c:	d05b      	beq.n	8000406 <_ZN12ClockControl17Set_AHB_PrescalerEt+0xd6>
- 800034e:	f5b3 7f80 	cmp.w	r3, #256	; 0x100
- 8000352:	dc66      	bgt.n	8000422 <_ZN12ClockControl17Set_AHB_PrescalerEt+0xf2>
- 8000354:	2b80      	cmp	r3, #128	; 0x80
- 8000356:	d04f      	beq.n	80003f8 <_ZN12ClockControl17Set_AHB_PrescalerEt+0xc8>
- 8000358:	2b80      	cmp	r3, #128	; 0x80
- 800035a:	dc62      	bgt.n	8000422 <_ZN12ClockControl17Set_AHB_PrescalerEt+0xf2>
- 800035c:	2b10      	cmp	r3, #16
- 800035e:	dc25      	bgt.n	80003ac <_ZN12ClockControl17Set_AHB_PrescalerEt+0x7c>
- 8000360:	2b02      	cmp	r3, #2
- 8000362:	db5e      	blt.n	8000422 <_ZN12ClockControl17Set_AHB_PrescalerEt+0xf2>
- 8000364:	3b02      	subs	r3, #2
- 8000366:	2b0e      	cmp	r3, #14
- 8000368:	d85b      	bhi.n	8000422 <_ZN12ClockControl17Set_AHB_PrescalerEt+0xf2>
- 800036a:	a201      	add	r2, pc, #4	; (adr r2, 8000370 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x40>)
- 800036c:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
- 8000370:	080003b3 	.word	0x080003b3
- 8000374:	08000423 	.word	0x08000423
- 8000378:	080003c1 	.word	0x080003c1
- 800037c:	08000423 	.word	0x08000423
- 8000380:	08000423 	.word	0x08000423
- 8000384:	08000423 	.word	0x08000423
- 8000388:	080003cf 	.word	0x080003cf
- 800038c:	08000423 	.word	0x08000423
- 8000390:	08000423 	.word	0x08000423
- 8000394:	08000423 	.word	0x08000423
- 8000398:	08000423 	.word	0x08000423
- 800039c:	08000423 	.word	0x08000423
- 80003a0:	08000423 	.word	0x08000423
- 80003a4:	08000423 	.word	0x08000423
- 80003a8:	080003dd 	.word	0x080003dd
- 80003ac:	2b40      	cmp	r3, #64	; 0x40
- 80003ae:	d01c      	beq.n	80003ea <_ZN12ClockControl17Set_AHB_PrescalerEt+0xba>
- 80003b0:	e037      	b.n	8000422 <_ZN12ClockControl17Set_AHB_PrescalerEt+0xf2>
+ 8000386:	88fb      	ldrh	r3, [r7, #6]
+ 8000388:	f5b3 7f00 	cmp.w	r3, #512	; 0x200
+ 800038c:	d068      	beq.n	8000460 <_ZN12ClockControl17Set_AHB_PrescalerEt+0xe4>
+ 800038e:	f5b3 7f00 	cmp.w	r3, #512	; 0x200
+ 8000392:	dc6c      	bgt.n	800046e <_ZN12ClockControl17Set_AHB_PrescalerEt+0xf2>
+ 8000394:	f5b3 7f80 	cmp.w	r3, #256	; 0x100
+ 8000398:	d05b      	beq.n	8000452 <_ZN12ClockControl17Set_AHB_PrescalerEt+0xd6>
+ 800039a:	f5b3 7f80 	cmp.w	r3, #256	; 0x100
+ 800039e:	dc66      	bgt.n	800046e <_ZN12ClockControl17Set_AHB_PrescalerEt+0xf2>
+ 80003a0:	2b80      	cmp	r3, #128	; 0x80
+ 80003a2:	d04f      	beq.n	8000444 <_ZN12ClockControl17Set_AHB_PrescalerEt+0xc8>
+ 80003a4:	2b80      	cmp	r3, #128	; 0x80
+ 80003a6:	dc62      	bgt.n	800046e <_ZN12ClockControl17Set_AHB_PrescalerEt+0xf2>
+ 80003a8:	2b10      	cmp	r3, #16
+ 80003aa:	dc25      	bgt.n	80003f8 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x7c>
+ 80003ac:	2b02      	cmp	r3, #2
+ 80003ae:	db5e      	blt.n	800046e <_ZN12ClockControl17Set_AHB_PrescalerEt+0xf2>
+ 80003b0:	3b02      	subs	r3, #2
+ 80003b2:	2b0e      	cmp	r3, #14
+ 80003b4:	d85b      	bhi.n	800046e <_ZN12ClockControl17Set_AHB_PrescalerEt+0xf2>
+ 80003b6:	a201      	add	r2, pc, #4	; (adr r2, 80003bc <_ZN12ClockControl17Set_AHB_PrescalerEt+0x40>)
+ 80003b8:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
+ 80003bc:	080003ff 	.word	0x080003ff
+ 80003c0:	0800046f 	.word	0x0800046f
+ 80003c4:	0800040d 	.word	0x0800040d
+ 80003c8:	0800046f 	.word	0x0800046f
+ 80003cc:	0800046f 	.word	0x0800046f
+ 80003d0:	0800046f 	.word	0x0800046f
+ 80003d4:	0800041b 	.word	0x0800041b
+ 80003d8:	0800046f 	.word	0x0800046f
+ 80003dc:	0800046f 	.word	0x0800046f
+ 80003e0:	0800046f 	.word	0x0800046f
+ 80003e4:	0800046f 	.word	0x0800046f
+ 80003e8:	0800046f 	.word	0x0800046f
+ 80003ec:	0800046f 	.word	0x0800046f
+ 80003f0:	0800046f 	.word	0x0800046f
+ 80003f4:	08000429 	.word	0x08000429
+ 80003f8:	2b40      	cmp	r3, #64	; 0x40
+ 80003fa:	d01c      	beq.n	8000436 <_ZN12ClockControl17Set_AHB_PrescalerEt+0xba>
+ 80003fc:	e037      	b.n	800046e <_ZN12ClockControl17Set_AHB_PrescalerEt+0xf2>
 	{
 	case 2:
 		RCC->CFGR |= RCC_CFGR_HPRE_DIV2;
- 80003b2:	4b21      	ldr	r3, [pc, #132]	; (8000438 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
- 80003b4:	685b      	ldr	r3, [r3, #4]
- 80003b6:	4a20      	ldr	r2, [pc, #128]	; (8000438 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
- 80003b8:	f043 0380 	orr.w	r3, r3, #128	; 0x80
- 80003bc:	6053      	str	r3, [r2, #4]
+ 80003fe:	4b21      	ldr	r3, [pc, #132]	; (8000484 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
+ 8000400:	685b      	ldr	r3, [r3, #4]
+ 8000402:	4a20      	ldr	r2, [pc, #128]	; (8000484 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
+ 8000404:	f043 0380 	orr.w	r3, r3, #128	; 0x80
+ 8000408:	6053      	str	r3, [r2, #4]
 		break;
- 80003be:	e035      	b.n	800042c <_ZN12ClockControl17Set_AHB_PrescalerEt+0xfc>
+ 800040a:	e035      	b.n	8000478 <_ZN12ClockControl17Set_AHB_PrescalerEt+0xfc>
 	case 4:
 		RCC->CFGR |= RCC_CFGR_HPRE_DIV4;
- 80003c0:	4b1d      	ldr	r3, [pc, #116]	; (8000438 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
- 80003c2:	685b      	ldr	r3, [r3, #4]
- 80003c4:	4a1c      	ldr	r2, [pc, #112]	; (8000438 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
- 80003c6:	f043 0390 	orr.w	r3, r3, #144	; 0x90
- 80003ca:	6053      	str	r3, [r2, #4]
+ 800040c:	4b1d      	ldr	r3, [pc, #116]	; (8000484 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
+ 800040e:	685b      	ldr	r3, [r3, #4]
+ 8000410:	4a1c      	ldr	r2, [pc, #112]	; (8000484 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
+ 8000412:	f043 0390 	orr.w	r3, r3, #144	; 0x90
+ 8000416:	6053      	str	r3, [r2, #4]
 		break;
- 80003cc:	e02e      	b.n	800042c <_ZN12ClockControl17Set_AHB_PrescalerEt+0xfc>
+ 8000418:	e02e      	b.n	8000478 <_ZN12ClockControl17Set_AHB_PrescalerEt+0xfc>
 	case 8:
 		RCC->CFGR |= RCC_CFGR_HPRE_DIV8;
- 80003ce:	4b1a      	ldr	r3, [pc, #104]	; (8000438 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
- 80003d0:	685b      	ldr	r3, [r3, #4]
- 80003d2:	4a19      	ldr	r2, [pc, #100]	; (8000438 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
- 80003d4:	f043 03a0 	orr.w	r3, r3, #160	; 0xa0
- 80003d8:	6053      	str	r3, [r2, #4]
+ 800041a:	4b1a      	ldr	r3, [pc, #104]	; (8000484 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
+ 800041c:	685b      	ldr	r3, [r3, #4]
+ 800041e:	4a19      	ldr	r2, [pc, #100]	; (8000484 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
+ 8000420:	f043 03a0 	orr.w	r3, r3, #160	; 0xa0
+ 8000424:	6053      	str	r3, [r2, #4]
 		break;
- 80003da:	e027      	b.n	800042c <_ZN12ClockControl17Set_AHB_PrescalerEt+0xfc>
+ 8000426:	e027      	b.n	8000478 <_ZN12ClockControl17Set_AHB_PrescalerEt+0xfc>
 	case 16:
 		RCC->CFGR |= RCC_CFGR_HPRE_DIV16;
- 80003dc:	4b16      	ldr	r3, [pc, #88]	; (8000438 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
- 80003de:	685b      	ldr	r3, [r3, #4]
- 80003e0:	4a15      	ldr	r2, [pc, #84]	; (8000438 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
- 80003e2:	f043 03b0 	orr.w	r3, r3, #176	; 0xb0
- 80003e6:	6053      	str	r3, [r2, #4]
+ 8000428:	4b16      	ldr	r3, [pc, #88]	; (8000484 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
+ 800042a:	685b      	ldr	r3, [r3, #4]
+ 800042c:	4a15      	ldr	r2, [pc, #84]	; (8000484 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
+ 800042e:	f043 03b0 	orr.w	r3, r3, #176	; 0xb0
+ 8000432:	6053      	str	r3, [r2, #4]
 		break;
- 80003e8:	e020      	b.n	800042c <_ZN12ClockControl17Set_AHB_PrescalerEt+0xfc>
+ 8000434:	e020      	b.n	8000478 <_ZN12ClockControl17Set_AHB_PrescalerEt+0xfc>
 	case 64:
 		RCC->CFGR |= RCC_CFGR_HPRE_DIV64;
- 80003ea:	4b13      	ldr	r3, [pc, #76]	; (8000438 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
- 80003ec:	685b      	ldr	r3, [r3, #4]
- 80003ee:	4a12      	ldr	r2, [pc, #72]	; (8000438 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
- 80003f0:	f043 03c0 	orr.w	r3, r3, #192	; 0xc0
- 80003f4:	6053      	str	r3, [r2, #4]
+ 8000436:	4b13      	ldr	r3, [pc, #76]	; (8000484 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
+ 8000438:	685b      	ldr	r3, [r3, #4]
+ 800043a:	4a12      	ldr	r2, [pc, #72]	; (8000484 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
+ 800043c:	f043 03c0 	orr.w	r3, r3, #192	; 0xc0
+ 8000440:	6053      	str	r3, [r2, #4]
 		break;
- 80003f6:	e019      	b.n	800042c <_ZN12ClockControl17Set_AHB_PrescalerEt+0xfc>
+ 8000442:	e019      	b.n	8000478 <_ZN12ClockControl17Set_AHB_PrescalerEt+0xfc>
 	case 128:
 		RCC->CFGR |= RCC_CFGR_HPRE_DIV128;
- 80003f8:	4b0f      	ldr	r3, [pc, #60]	; (8000438 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
- 80003fa:	685b      	ldr	r3, [r3, #4]
- 80003fc:	4a0e      	ldr	r2, [pc, #56]	; (8000438 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
- 80003fe:	f043 03d0 	orr.w	r3, r3, #208	; 0xd0
- 8000402:	6053      	str	r3, [r2, #4]
+ 8000444:	4b0f      	ldr	r3, [pc, #60]	; (8000484 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
+ 8000446:	685b      	ldr	r3, [r3, #4]
+ 8000448:	4a0e      	ldr	r2, [pc, #56]	; (8000484 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
+ 800044a:	f043 03d0 	orr.w	r3, r3, #208	; 0xd0
+ 800044e:	6053      	str	r3, [r2, #4]
 		break;
- 8000404:	e012      	b.n	800042c <_ZN12ClockControl17Set_AHB_PrescalerEt+0xfc>
+ 8000450:	e012      	b.n	8000478 <_ZN12ClockControl17Set_AHB_PrescalerEt+0xfc>
 	case 256:
 		RCC->CFGR |= RCC_CFGR_HPRE_DIV256;
- 8000406:	4b0c      	ldr	r3, [pc, #48]	; (8000438 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
- 8000408:	685b      	ldr	r3, [r3, #4]
- 800040a:	4a0b      	ldr	r2, [pc, #44]	; (8000438 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
- 800040c:	f043 03e0 	orr.w	r3, r3, #224	; 0xe0
- 8000410:	6053      	str	r3, [r2, #4]
+ 8000452:	4b0c      	ldr	r3, [pc, #48]	; (8000484 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
+ 8000454:	685b      	ldr	r3, [r3, #4]
+ 8000456:	4a0b      	ldr	r2, [pc, #44]	; (8000484 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
+ 8000458:	f043 03e0 	orr.w	r3, r3, #224	; 0xe0
+ 800045c:	6053      	str	r3, [r2, #4]
 		break;
- 8000412:	e00b      	b.n	800042c <_ZN12ClockControl17Set_AHB_PrescalerEt+0xfc>
+ 800045e:	e00b      	b.n	8000478 <_ZN12ClockControl17Set_AHB_PrescalerEt+0xfc>
 	case 512:
 		RCC->CFGR |= RCC_CFGR_HPRE_DIV512;
- 8000414:	4b08      	ldr	r3, [pc, #32]	; (8000438 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
- 8000416:	685b      	ldr	r3, [r3, #4]
- 8000418:	4a07      	ldr	r2, [pc, #28]	; (8000438 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
- 800041a:	f043 03f0 	orr.w	r3, r3, #240	; 0xf0
- 800041e:	6053      	str	r3, [r2, #4]
+ 8000460:	4b08      	ldr	r3, [pc, #32]	; (8000484 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
+ 8000462:	685b      	ldr	r3, [r3, #4]
+ 8000464:	4a07      	ldr	r2, [pc, #28]	; (8000484 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
+ 8000466:	f043 03f0 	orr.w	r3, r3, #240	; 0xf0
+ 800046a:	6053      	str	r3, [r2, #4]
 		break;
- 8000420:	e004      	b.n	800042c <_ZN12ClockControl17Set_AHB_PrescalerEt+0xfc>
+ 800046c:	e004      	b.n	8000478 <_ZN12ClockControl17Set_AHB_PrescalerEt+0xfc>
 	default:
 		RCC->CFGR |= RCC_CFGR_HPRE_DIV1;
- 8000422:	4b05      	ldr	r3, [pc, #20]	; (8000438 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
- 8000424:	4a04      	ldr	r2, [pc, #16]	; (8000438 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
- 8000426:	685b      	ldr	r3, [r3, #4]
- 8000428:	6053      	str	r3, [r2, #4]
+ 800046e:	4b05      	ldr	r3, [pc, #20]	; (8000484 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
+ 8000470:	4a04      	ldr	r2, [pc, #16]	; (8000484 <_ZN12ClockControl17Set_AHB_PrescalerEt+0x108>)
+ 8000472:	685b      	ldr	r3, [r3, #4]
+ 8000474:	6053      	str	r3, [r2, #4]
 	}
 }
- 800042a:	bf00      	nop
- 800042c:	bf00      	nop
- 800042e:	370c      	adds	r7, #12
- 8000430:	46bd      	mov	sp, r7
- 8000432:	bc80      	pop	{r7}
- 8000434:	4770      	bx	lr
- 8000436:	bf00      	nop
- 8000438:	40021000 	.word	0x40021000
+ 8000476:	bf00      	nop
+ 8000478:	bf00      	nop
+ 800047a:	370c      	adds	r7, #12
+ 800047c:	46bd      	mov	sp, r7
+ 800047e:	bc80      	pop	{r7}
+ 8000480:	4770      	bx	lr
+ 8000482:	bf00      	nop
+ 8000484:	40021000 	.word	0x40021000
 
-0800043c <_ZN12ClockControl18Set_APB1_PrescalerEt>:
+08000488 <_ZN12ClockControl18Set_APB1_PrescalerEt>:
 void ClockControl::Set_APB1_Prescaler(unsigned short APB1_Prescaler_Value)
 {
- 800043c:	b480      	push	{r7}
- 800043e:	b083      	sub	sp, #12
- 8000440:	af00      	add	r7, sp, #0
- 8000442:	4603      	mov	r3, r0
- 8000444:	80fb      	strh	r3, [r7, #6]
+ 8000488:	b480      	push	{r7}
+ 800048a:	b083      	sub	sp, #12
+ 800048c:	af00      	add	r7, sp, #0
+ 800048e:	4603      	mov	r3, r0
+ 8000490:	80fb      	strh	r3, [r7, #6]
 	switch (APB1_Prescaler_Value)
- 8000446:	88fb      	ldrh	r3, [r7, #6]
- 8000448:	3b01      	subs	r3, #1
- 800044a:	2b0f      	cmp	r3, #15
- 800044c:	d843      	bhi.n	80004d6 <_ZN12ClockControl18Set_APB1_PrescalerEt+0x9a>
- 800044e:	a201      	add	r2, pc, #4	; (adr r2, 8000454 <_ZN12ClockControl18Set_APB1_PrescalerEt+0x18>)
- 8000450:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
- 8000454:	08000495 	.word	0x08000495
- 8000458:	0800049f 	.word	0x0800049f
- 800045c:	080004d7 	.word	0x080004d7
- 8000460:	080004ad 	.word	0x080004ad
- 8000464:	080004d7 	.word	0x080004d7
- 8000468:	080004d7 	.word	0x080004d7
- 800046c:	080004d7 	.word	0x080004d7
- 8000470:	080004bb 	.word	0x080004bb
- 8000474:	080004d7 	.word	0x080004d7
- 8000478:	080004d7 	.word	0x080004d7
- 800047c:	080004d7 	.word	0x080004d7
- 8000480:	080004d7 	.word	0x080004d7
- 8000484:	080004d7 	.word	0x080004d7
- 8000488:	080004d7 	.word	0x080004d7
- 800048c:	080004d7 	.word	0x080004d7
- 8000490:	080004c9 	.word	0x080004c9
+ 8000492:	88fb      	ldrh	r3, [r7, #6]
+ 8000494:	3b01      	subs	r3, #1
+ 8000496:	2b0f      	cmp	r3, #15
+ 8000498:	d843      	bhi.n	8000522 <_ZN12ClockControl18Set_APB1_PrescalerEt+0x9a>
+ 800049a:	a201      	add	r2, pc, #4	; (adr r2, 80004a0 <_ZN12ClockControl18Set_APB1_PrescalerEt+0x18>)
+ 800049c:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
+ 80004a0:	080004e1 	.word	0x080004e1
+ 80004a4:	080004eb 	.word	0x080004eb
+ 80004a8:	08000523 	.word	0x08000523
+ 80004ac:	080004f9 	.word	0x080004f9
+ 80004b0:	08000523 	.word	0x08000523
+ 80004b4:	08000523 	.word	0x08000523
+ 80004b8:	08000523 	.word	0x08000523
+ 80004bc:	08000507 	.word	0x08000507
+ 80004c0:	08000523 	.word	0x08000523
+ 80004c4:	08000523 	.word	0x08000523
+ 80004c8:	08000523 	.word	0x08000523
+ 80004cc:	08000523 	.word	0x08000523
+ 80004d0:	08000523 	.word	0x08000523
+ 80004d4:	08000523 	.word	0x08000523
+ 80004d8:	08000523 	.word	0x08000523
+ 80004dc:	08000515 	.word	0x08000515
 	{
 	case 1:
 		RCC->CFGR |= RCC_CFGR_PPRE1_DIV1;
- 8000494:	4b15      	ldr	r3, [pc, #84]	; (80004ec <_ZN12ClockControl18Set_APB1_PrescalerEt+0xb0>)
- 8000496:	4a15      	ldr	r2, [pc, #84]	; (80004ec <_ZN12ClockControl18Set_APB1_PrescalerEt+0xb0>)
- 8000498:	685b      	ldr	r3, [r3, #4]
- 800049a:	6053      	str	r3, [r2, #4]
+ 80004e0:	4b15      	ldr	r3, [pc, #84]	; (8000538 <_ZN12ClockControl18Set_APB1_PrescalerEt+0xb0>)
+ 80004e2:	4a15      	ldr	r2, [pc, #84]	; (8000538 <_ZN12ClockControl18Set_APB1_PrescalerEt+0xb0>)
+ 80004e4:	685b      	ldr	r3, [r3, #4]
+ 80004e6:	6053      	str	r3, [r2, #4]
 		break;
- 800049c:	e020      	b.n	80004e0 <_ZN12ClockControl18Set_APB1_PrescalerEt+0xa4>
+ 80004e8:	e020      	b.n	800052c <_ZN12ClockControl18Set_APB1_PrescalerEt+0xa4>
 	case 2:
 		RCC->CFGR |= RCC_CFGR_PPRE1_DIV2;
- 800049e:	4b13      	ldr	r3, [pc, #76]	; (80004ec <_ZN12ClockControl18Set_APB1_PrescalerEt+0xb0>)
- 80004a0:	685b      	ldr	r3, [r3, #4]
- 80004a2:	4a12      	ldr	r2, [pc, #72]	; (80004ec <_ZN12ClockControl18Set_APB1_PrescalerEt+0xb0>)
- 80004a4:	f443 6380 	orr.w	r3, r3, #1024	; 0x400
- 80004a8:	6053      	str	r3, [r2, #4]
+ 80004ea:	4b13      	ldr	r3, [pc, #76]	; (8000538 <_ZN12ClockControl18Set_APB1_PrescalerEt+0xb0>)
+ 80004ec:	685b      	ldr	r3, [r3, #4]
+ 80004ee:	4a12      	ldr	r2, [pc, #72]	; (8000538 <_ZN12ClockControl18Set_APB1_PrescalerEt+0xb0>)
+ 80004f0:	f443 6380 	orr.w	r3, r3, #1024	; 0x400
+ 80004f4:	6053      	str	r3, [r2, #4]
 		break;
- 80004aa:	e019      	b.n	80004e0 <_ZN12ClockControl18Set_APB1_PrescalerEt+0xa4>
+ 80004f6:	e019      	b.n	800052c <_ZN12ClockControl18Set_APB1_PrescalerEt+0xa4>
 	case 4:
 		RCC->CFGR |= RCC_CFGR_PPRE1_DIV4;
- 80004ac:	4b0f      	ldr	r3, [pc, #60]	; (80004ec <_ZN12ClockControl18Set_APB1_PrescalerEt+0xb0>)
- 80004ae:	685b      	ldr	r3, [r3, #4]
- 80004b0:	4a0e      	ldr	r2, [pc, #56]	; (80004ec <_ZN12ClockControl18Set_APB1_PrescalerEt+0xb0>)
- 80004b2:	f443 63a0 	orr.w	r3, r3, #1280	; 0x500
- 80004b6:	6053      	str	r3, [r2, #4]
+ 80004f8:	4b0f      	ldr	r3, [pc, #60]	; (8000538 <_ZN12ClockControl18Set_APB1_PrescalerEt+0xb0>)
+ 80004fa:	685b      	ldr	r3, [r3, #4]
+ 80004fc:	4a0e      	ldr	r2, [pc, #56]	; (8000538 <_ZN12ClockControl18Set_APB1_PrescalerEt+0xb0>)
+ 80004fe:	f443 63a0 	orr.w	r3, r3, #1280	; 0x500
+ 8000502:	6053      	str	r3, [r2, #4]
 		break;
- 80004b8:	e012      	b.n	80004e0 <_ZN12ClockControl18Set_APB1_PrescalerEt+0xa4>
+ 8000504:	e012      	b.n	800052c <_ZN12ClockControl18Set_APB1_PrescalerEt+0xa4>
 	case 8:
 		RCC->CFGR |= RCC_CFGR_PPRE1_DIV8;
- 80004ba:	4b0c      	ldr	r3, [pc, #48]	; (80004ec <_ZN12ClockControl18Set_APB1_PrescalerEt+0xb0>)
- 80004bc:	685b      	ldr	r3, [r3, #4]
- 80004be:	4a0b      	ldr	r2, [pc, #44]	; (80004ec <_ZN12ClockControl18Set_APB1_PrescalerEt+0xb0>)
- 80004c0:	f443 63c0 	orr.w	r3, r3, #1536	; 0x600
- 80004c4:	6053      	str	r3, [r2, #4]
+ 8000506:	4b0c      	ldr	r3, [pc, #48]	; (8000538 <_ZN12ClockControl18Set_APB1_PrescalerEt+0xb0>)
+ 8000508:	685b      	ldr	r3, [r3, #4]
+ 800050a:	4a0b      	ldr	r2, [pc, #44]	; (8000538 <_ZN12ClockControl18Set_APB1_PrescalerEt+0xb0>)
+ 800050c:	f443 63c0 	orr.w	r3, r3, #1536	; 0x600
+ 8000510:	6053      	str	r3, [r2, #4]
 		break;
- 80004c6:	e00b      	b.n	80004e0 <_ZN12ClockControl18Set_APB1_PrescalerEt+0xa4>
+ 8000512:	e00b      	b.n	800052c <_ZN12ClockControl18Set_APB1_PrescalerEt+0xa4>
 	case 16:
 		RCC->CFGR |= RCC_CFGR_PPRE1_DIV16;
- 80004c8:	4b08      	ldr	r3, [pc, #32]	; (80004ec <_ZN12ClockControl18Set_APB1_PrescalerEt+0xb0>)
- 80004ca:	685b      	ldr	r3, [r3, #4]
- 80004cc:	4a07      	ldr	r2, [pc, #28]	; (80004ec <_ZN12ClockControl18Set_APB1_PrescalerEt+0xb0>)
- 80004ce:	f443 63e0 	orr.w	r3, r3, #1792	; 0x700
- 80004d2:	6053      	str	r3, [r2, #4]
+ 8000514:	4b08      	ldr	r3, [pc, #32]	; (8000538 <_ZN12ClockControl18Set_APB1_PrescalerEt+0xb0>)
+ 8000516:	685b      	ldr	r3, [r3, #4]
+ 8000518:	4a07      	ldr	r2, [pc, #28]	; (8000538 <_ZN12ClockControl18Set_APB1_PrescalerEt+0xb0>)
+ 800051a:	f443 63e0 	orr.w	r3, r3, #1792	; 0x700
+ 800051e:	6053      	str	r3, [r2, #4]
 		break;
- 80004d4:	e004      	b.n	80004e0 <_ZN12ClockControl18Set_APB1_PrescalerEt+0xa4>
+ 8000520:	e004      	b.n	800052c <_ZN12ClockControl18Set_APB1_PrescalerEt+0xa4>
 	default:
 		RCC->CFGR |= RCC_CFGR_PPRE1_DIV1;
- 80004d6:	4b05      	ldr	r3, [pc, #20]	; (80004ec <_ZN12ClockControl18Set_APB1_PrescalerEt+0xb0>)
- 80004d8:	4a04      	ldr	r2, [pc, #16]	; (80004ec <_ZN12ClockControl18Set_APB1_PrescalerEt+0xb0>)
- 80004da:	685b      	ldr	r3, [r3, #4]
- 80004dc:	6053      	str	r3, [r2, #4]
+ 8000522:	4b05      	ldr	r3, [pc, #20]	; (8000538 <_ZN12ClockControl18Set_APB1_PrescalerEt+0xb0>)
+ 8000524:	4a04      	ldr	r2, [pc, #16]	; (8000538 <_ZN12ClockControl18Set_APB1_PrescalerEt+0xb0>)
+ 8000526:	685b      	ldr	r3, [r3, #4]
+ 8000528:	6053      	str	r3, [r2, #4]
 	}
 }
- 80004de:	bf00      	nop
- 80004e0:	bf00      	nop
- 80004e2:	370c      	adds	r7, #12
- 80004e4:	46bd      	mov	sp, r7
- 80004e6:	bc80      	pop	{r7}
- 80004e8:	4770      	bx	lr
- 80004ea:	bf00      	nop
- 80004ec:	40021000 	.word	0x40021000
+ 800052a:	bf00      	nop
+ 800052c:	bf00      	nop
+ 800052e:	370c      	adds	r7, #12
+ 8000530:	46bd      	mov	sp, r7
+ 8000532:	bc80      	pop	{r7}
+ 8000534:	4770      	bx	lr
+ 8000536:	bf00      	nop
+ 8000538:	40021000 	.word	0x40021000
 
-080004f0 <_ZN12ClockControl18Set_APB2_PrescalerEt>:
+0800053c <_ZN12ClockControl18Set_APB2_PrescalerEt>:
 void ClockControl::Set_APB2_Prescaler(unsigned short APB2_Prescaler_Value)
 {
- 80004f0:	b480      	push	{r7}
- 80004f2:	b083      	sub	sp, #12
- 80004f4:	af00      	add	r7, sp, #0
- 80004f6:	4603      	mov	r3, r0
- 80004f8:	80fb      	strh	r3, [r7, #6]
+ 800053c:	b480      	push	{r7}
+ 800053e:	b083      	sub	sp, #12
+ 8000540:	af00      	add	r7, sp, #0
+ 8000542:	4603      	mov	r3, r0
+ 8000544:	80fb      	strh	r3, [r7, #6]
 	switch (APB2_Prescaler_Value)
- 80004fa:	88fb      	ldrh	r3, [r7, #6]
- 80004fc:	3b01      	subs	r3, #1
- 80004fe:	2b0f      	cmp	r3, #15
- 8000500:	d843      	bhi.n	800058a <_ZN12ClockControl18Set_APB2_PrescalerEt+0x9a>
- 8000502:	a201      	add	r2, pc, #4	; (adr r2, 8000508 <_ZN12ClockControl18Set_APB2_PrescalerEt+0x18>)
- 8000504:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
- 8000508:	08000549 	.word	0x08000549
- 800050c:	08000553 	.word	0x08000553
- 8000510:	0800058b 	.word	0x0800058b
- 8000514:	08000561 	.word	0x08000561
- 8000518:	0800058b 	.word	0x0800058b
- 800051c:	0800058b 	.word	0x0800058b
- 8000520:	0800058b 	.word	0x0800058b
- 8000524:	0800056f 	.word	0x0800056f
- 8000528:	0800058b 	.word	0x0800058b
- 800052c:	0800058b 	.word	0x0800058b
- 8000530:	0800058b 	.word	0x0800058b
- 8000534:	0800058b 	.word	0x0800058b
- 8000538:	0800058b 	.word	0x0800058b
- 800053c:	0800058b 	.word	0x0800058b
- 8000540:	0800058b 	.word	0x0800058b
- 8000544:	0800057d 	.word	0x0800057d
+ 8000546:	88fb      	ldrh	r3, [r7, #6]
+ 8000548:	3b01      	subs	r3, #1
+ 800054a:	2b0f      	cmp	r3, #15
+ 800054c:	d843      	bhi.n	80005d6 <_ZN12ClockControl18Set_APB2_PrescalerEt+0x9a>
+ 800054e:	a201      	add	r2, pc, #4	; (adr r2, 8000554 <_ZN12ClockControl18Set_APB2_PrescalerEt+0x18>)
+ 8000550:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
+ 8000554:	08000595 	.word	0x08000595
+ 8000558:	0800059f 	.word	0x0800059f
+ 800055c:	080005d7 	.word	0x080005d7
+ 8000560:	080005ad 	.word	0x080005ad
+ 8000564:	080005d7 	.word	0x080005d7
+ 8000568:	080005d7 	.word	0x080005d7
+ 800056c:	080005d7 	.word	0x080005d7
+ 8000570:	080005bb 	.word	0x080005bb
+ 8000574:	080005d7 	.word	0x080005d7
+ 8000578:	080005d7 	.word	0x080005d7
+ 800057c:	080005d7 	.word	0x080005d7
+ 8000580:	080005d7 	.word	0x080005d7
+ 8000584:	080005d7 	.word	0x080005d7
+ 8000588:	080005d7 	.word	0x080005d7
+ 800058c:	080005d7 	.word	0x080005d7
+ 8000590:	080005c9 	.word	0x080005c9
 	{
 	case 1:
 		RCC->CFGR |= RCC_CFGR_PPRE2_DIV1;
- 8000548:	4b15      	ldr	r3, [pc, #84]	; (80005a0 <_ZN12ClockControl18Set_APB2_PrescalerEt+0xb0>)
- 800054a:	4a15      	ldr	r2, [pc, #84]	; (80005a0 <_ZN12ClockControl18Set_APB2_PrescalerEt+0xb0>)
- 800054c:	685b      	ldr	r3, [r3, #4]
- 800054e:	6053      	str	r3, [r2, #4]
+ 8000594:	4b15      	ldr	r3, [pc, #84]	; (80005ec <_ZN12ClockControl18Set_APB2_PrescalerEt+0xb0>)
+ 8000596:	4a15      	ldr	r2, [pc, #84]	; (80005ec <_ZN12ClockControl18Set_APB2_PrescalerEt+0xb0>)
+ 8000598:	685b      	ldr	r3, [r3, #4]
+ 800059a:	6053      	str	r3, [r2, #4]
 		break;
- 8000550:	e020      	b.n	8000594 <_ZN12ClockControl18Set_APB2_PrescalerEt+0xa4>
+ 800059c:	e020      	b.n	80005e0 <_ZN12ClockControl18Set_APB2_PrescalerEt+0xa4>
 	case 2:
 		RCC->CFGR |= RCC_CFGR_PPRE2_DIV2;
- 8000552:	4b13      	ldr	r3, [pc, #76]	; (80005a0 <_ZN12ClockControl18Set_APB2_PrescalerEt+0xb0>)
- 8000554:	685b      	ldr	r3, [r3, #4]
- 8000556:	4a12      	ldr	r2, [pc, #72]	; (80005a0 <_ZN12ClockControl18Set_APB2_PrescalerEt+0xb0>)
- 8000558:	f443 5300 	orr.w	r3, r3, #8192	; 0x2000
- 800055c:	6053      	str	r3, [r2, #4]
+ 800059e:	4b13      	ldr	r3, [pc, #76]	; (80005ec <_ZN12ClockControl18Set_APB2_PrescalerEt+0xb0>)
+ 80005a0:	685b      	ldr	r3, [r3, #4]
+ 80005a2:	4a12      	ldr	r2, [pc, #72]	; (80005ec <_ZN12ClockControl18Set_APB2_PrescalerEt+0xb0>)
+ 80005a4:	f443 5300 	orr.w	r3, r3, #8192	; 0x2000
+ 80005a8:	6053      	str	r3, [r2, #4]
 		break;
- 800055e:	e019      	b.n	8000594 <_ZN12ClockControl18Set_APB2_PrescalerEt+0xa4>
+ 80005aa:	e019      	b.n	80005e0 <_ZN12ClockControl18Set_APB2_PrescalerEt+0xa4>
 	case 4:
 		RCC->CFGR |= RCC_CFGR_PPRE2_DIV4;
- 8000560:	4b0f      	ldr	r3, [pc, #60]	; (80005a0 <_ZN12ClockControl18Set_APB2_PrescalerEt+0xb0>)
- 8000562:	685b      	ldr	r3, [r3, #4]
- 8000564:	4a0e      	ldr	r2, [pc, #56]	; (80005a0 <_ZN12ClockControl18Set_APB2_PrescalerEt+0xb0>)
- 8000566:	f443 5320 	orr.w	r3, r3, #10240	; 0x2800
- 800056a:	6053      	str	r3, [r2, #4]
+ 80005ac:	4b0f      	ldr	r3, [pc, #60]	; (80005ec <_ZN12ClockControl18Set_APB2_PrescalerEt+0xb0>)
+ 80005ae:	685b      	ldr	r3, [r3, #4]
+ 80005b0:	4a0e      	ldr	r2, [pc, #56]	; (80005ec <_ZN12ClockControl18Set_APB2_PrescalerEt+0xb0>)
+ 80005b2:	f443 5320 	orr.w	r3, r3, #10240	; 0x2800
+ 80005b6:	6053      	str	r3, [r2, #4]
 		break;
- 800056c:	e012      	b.n	8000594 <_ZN12ClockControl18Set_APB2_PrescalerEt+0xa4>
+ 80005b8:	e012      	b.n	80005e0 <_ZN12ClockControl18Set_APB2_PrescalerEt+0xa4>
 	case 8:
 		RCC->CFGR |= RCC_CFGR_PPRE2_DIV8;
- 800056e:	4b0c      	ldr	r3, [pc, #48]	; (80005a0 <_ZN12ClockControl18Set_APB2_PrescalerEt+0xb0>)
- 8000570:	685b      	ldr	r3, [r3, #4]
- 8000572:	4a0b      	ldr	r2, [pc, #44]	; (80005a0 <_ZN12ClockControl18Set_APB2_PrescalerEt+0xb0>)
- 8000574:	f443 5340 	orr.w	r3, r3, #12288	; 0x3000
- 8000578:	6053      	str	r3, [r2, #4]
+ 80005ba:	4b0c      	ldr	r3, [pc, #48]	; (80005ec <_ZN12ClockControl18Set_APB2_PrescalerEt+0xb0>)
+ 80005bc:	685b      	ldr	r3, [r3, #4]
+ 80005be:	4a0b      	ldr	r2, [pc, #44]	; (80005ec <_ZN12ClockControl18Set_APB2_PrescalerEt+0xb0>)
+ 80005c0:	f443 5340 	orr.w	r3, r3, #12288	; 0x3000
+ 80005c4:	6053      	str	r3, [r2, #4]
 		break;
- 800057a:	e00b      	b.n	8000594 <_ZN12ClockControl18Set_APB2_PrescalerEt+0xa4>
+ 80005c6:	e00b      	b.n	80005e0 <_ZN12ClockControl18Set_APB2_PrescalerEt+0xa4>
 	case 16:
 		RCC->CFGR |= RCC_CFGR_PPRE2_DIV16;
- 800057c:	4b08      	ldr	r3, [pc, #32]	; (80005a0 <_ZN12ClockControl18Set_APB2_PrescalerEt+0xb0>)
- 800057e:	685b      	ldr	r3, [r3, #4]
- 8000580:	4a07      	ldr	r2, [pc, #28]	; (80005a0 <_ZN12ClockControl18Set_APB2_PrescalerEt+0xb0>)
- 8000582:	f443 5360 	orr.w	r3, r3, #14336	; 0x3800
- 8000586:	6053      	str	r3, [r2, #4]
+ 80005c8:	4b08      	ldr	r3, [pc, #32]	; (80005ec <_ZN12ClockControl18Set_APB2_PrescalerEt+0xb0>)
+ 80005ca:	685b      	ldr	r3, [r3, #4]
+ 80005cc:	4a07      	ldr	r2, [pc, #28]	; (80005ec <_ZN12ClockControl18Set_APB2_PrescalerEt+0xb0>)
+ 80005ce:	f443 5360 	orr.w	r3, r3, #14336	; 0x3800
+ 80005d2:	6053      	str	r3, [r2, #4]
 		break;
- 8000588:	e004      	b.n	8000594 <_ZN12ClockControl18Set_APB2_PrescalerEt+0xa4>
+ 80005d4:	e004      	b.n	80005e0 <_ZN12ClockControl18Set_APB2_PrescalerEt+0xa4>
 	default:
 		RCC->CFGR |= RCC_CFGR_PPRE2_DIV1;
- 800058a:	4b05      	ldr	r3, [pc, #20]	; (80005a0 <_ZN12ClockControl18Set_APB2_PrescalerEt+0xb0>)
- 800058c:	4a04      	ldr	r2, [pc, #16]	; (80005a0 <_ZN12ClockControl18Set_APB2_PrescalerEt+0xb0>)
- 800058e:	685b      	ldr	r3, [r3, #4]
- 8000590:	6053      	str	r3, [r2, #4]
+ 80005d6:	4b05      	ldr	r3, [pc, #20]	; (80005ec <_ZN12ClockControl18Set_APB2_PrescalerEt+0xb0>)
+ 80005d8:	4a04      	ldr	r2, [pc, #16]	; (80005ec <_ZN12ClockControl18Set_APB2_PrescalerEt+0xb0>)
+ 80005da:	685b      	ldr	r3, [r3, #4]
+ 80005dc:	6053      	str	r3, [r2, #4]
 	}	
 }
- 8000592:	bf00      	nop
- 8000594:	bf00      	nop
- 8000596:	370c      	adds	r7, #12
- 8000598:	46bd      	mov	sp, r7
- 800059a:	bc80      	pop	{r7}
- 800059c:	4770      	bx	lr
- 800059e:	bf00      	nop
- 80005a0:	40021000 	.word	0x40021000
+ 80005de:	bf00      	nop
+ 80005e0:	bf00      	nop
+ 80005e2:	370c      	adds	r7, #12
+ 80005e4:	46bd      	mov	sp, r7
+ 80005e6:	bc80      	pop	{r7}
+ 80005e8:	4770      	bx	lr
+ 80005ea:	bf00      	nop
+ 80005ec:	40021000 	.word	0x40021000
 
-080005a4 <_ZN12ClockControl17Set_ADC_PrescalerEt>:
+080005f0 <_ZN12ClockControl17Set_ADC_PrescalerEt>:
 void ClockControl::Set_ADC_Prescaler(unsigned short ADC_Prescaler_Value)
 {
- 80005a4:	b480      	push	{r7}
- 80005a6:	b083      	sub	sp, #12
- 80005a8:	af00      	add	r7, sp, #0
- 80005aa:	4603      	mov	r3, r0
- 80005ac:	80fb      	strh	r3, [r7, #6]
+ 80005f0:	b480      	push	{r7}
+ 80005f2:	b083      	sub	sp, #12
+ 80005f4:	af00      	add	r7, sp, #0
+ 80005f6:	4603      	mov	r3, r0
+ 80005f8:	80fb      	strh	r3, [r7, #6]
 	switch (ADC_Prescaler_Value)
- 80005ae:	88fb      	ldrh	r3, [r7, #6]
- 80005b0:	3b02      	subs	r3, #2
- 80005b2:	2b06      	cmp	r3, #6
- 80005b4:	d82a      	bhi.n	800060c <_ZN12ClockControl17Set_ADC_PrescalerEt+0x68>
- 80005b6:	a201      	add	r2, pc, #4	; (adr r2, 80005bc <_ZN12ClockControl17Set_ADC_PrescalerEt+0x18>)
- 80005b8:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
- 80005bc:	080005d9 	.word	0x080005d9
- 80005c0:	0800060d 	.word	0x0800060d
- 80005c4:	080005e3 	.word	0x080005e3
- 80005c8:	0800060d 	.word	0x0800060d
- 80005cc:	080005f1 	.word	0x080005f1
- 80005d0:	0800060d 	.word	0x0800060d
- 80005d4:	080005ff 	.word	0x080005ff
+ 80005fa:	88fb      	ldrh	r3, [r7, #6]
+ 80005fc:	3b02      	subs	r3, #2
+ 80005fe:	2b06      	cmp	r3, #6
+ 8000600:	d82a      	bhi.n	8000658 <_ZN12ClockControl17Set_ADC_PrescalerEt+0x68>
+ 8000602:	a201      	add	r2, pc, #4	; (adr r2, 8000608 <_ZN12ClockControl17Set_ADC_PrescalerEt+0x18>)
+ 8000604:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
+ 8000608:	08000625 	.word	0x08000625
+ 800060c:	08000659 	.word	0x08000659
+ 8000610:	0800062f 	.word	0x0800062f
+ 8000614:	08000659 	.word	0x08000659
+ 8000618:	0800063d 	.word	0x0800063d
+ 800061c:	08000659 	.word	0x08000659
+ 8000620:	0800064b 	.word	0x0800064b
 	{
 	case 2:
 		RCC->CFGR |= RCC_CFGR_ADCPRE_DIV2;
- 80005d8:	4b11      	ldr	r3, [pc, #68]	; (8000620 <_ZN12ClockControl17Set_ADC_PrescalerEt+0x7c>)
- 80005da:	4a11      	ldr	r2, [pc, #68]	; (8000620 <_ZN12ClockControl17Set_ADC_PrescalerEt+0x7c>)
- 80005dc:	685b      	ldr	r3, [r3, #4]
- 80005de:	6053      	str	r3, [r2, #4]
+ 8000624:	4b11      	ldr	r3, [pc, #68]	; (800066c <_ZN12ClockControl17Set_ADC_PrescalerEt+0x7c>)
+ 8000626:	4a11      	ldr	r2, [pc, #68]	; (800066c <_ZN12ClockControl17Set_ADC_PrescalerEt+0x7c>)
+ 8000628:	685b      	ldr	r3, [r3, #4]
+ 800062a:	6053      	str	r3, [r2, #4]
 		break;
- 80005e0:	e019      	b.n	8000616 <_ZN12ClockControl17Set_ADC_PrescalerEt+0x72>
+ 800062c:	e019      	b.n	8000662 <_ZN12ClockControl17Set_ADC_PrescalerEt+0x72>
 	case 4:
 		RCC->CFGR |= RCC_CFGR_ADCPRE_DIV4;
- 80005e2:	4b0f      	ldr	r3, [pc, #60]	; (8000620 <_ZN12ClockControl17Set_ADC_PrescalerEt+0x7c>)
- 80005e4:	685b      	ldr	r3, [r3, #4]
- 80005e6:	4a0e      	ldr	r2, [pc, #56]	; (8000620 <_ZN12ClockControl17Set_ADC_PrescalerEt+0x7c>)
- 80005e8:	f443 4380 	orr.w	r3, r3, #16384	; 0x4000
- 80005ec:	6053      	str	r3, [r2, #4]
+ 800062e:	4b0f      	ldr	r3, [pc, #60]	; (800066c <_ZN12ClockControl17Set_ADC_PrescalerEt+0x7c>)
+ 8000630:	685b      	ldr	r3, [r3, #4]
+ 8000632:	4a0e      	ldr	r2, [pc, #56]	; (800066c <_ZN12ClockControl17Set_ADC_PrescalerEt+0x7c>)
+ 8000634:	f443 4380 	orr.w	r3, r3, #16384	; 0x4000
+ 8000638:	6053      	str	r3, [r2, #4]
 		break;
- 80005ee:	e012      	b.n	8000616 <_ZN12ClockControl17Set_ADC_PrescalerEt+0x72>
+ 800063a:	e012      	b.n	8000662 <_ZN12ClockControl17Set_ADC_PrescalerEt+0x72>
 	case 6:
 		RCC->CFGR |= RCC_CFGR_ADCPRE_DIV6;
- 80005f0:	4b0b      	ldr	r3, [pc, #44]	; (8000620 <_ZN12ClockControl17Set_ADC_PrescalerEt+0x7c>)
- 80005f2:	685b      	ldr	r3, [r3, #4]
- 80005f4:	4a0a      	ldr	r2, [pc, #40]	; (8000620 <_ZN12ClockControl17Set_ADC_PrescalerEt+0x7c>)
- 80005f6:	f443 4300 	orr.w	r3, r3, #32768	; 0x8000
- 80005fa:	6053      	str	r3, [r2, #4]
+ 800063c:	4b0b      	ldr	r3, [pc, #44]	; (800066c <_ZN12ClockControl17Set_ADC_PrescalerEt+0x7c>)
+ 800063e:	685b      	ldr	r3, [r3, #4]
+ 8000640:	4a0a      	ldr	r2, [pc, #40]	; (800066c <_ZN12ClockControl17Set_ADC_PrescalerEt+0x7c>)
+ 8000642:	f443 4300 	orr.w	r3, r3, #32768	; 0x8000
+ 8000646:	6053      	str	r3, [r2, #4]
 		break;
- 80005fc:	e00b      	b.n	8000616 <_ZN12ClockControl17Set_ADC_PrescalerEt+0x72>
+ 8000648:	e00b      	b.n	8000662 <_ZN12ClockControl17Set_ADC_PrescalerEt+0x72>
 	case 8:
 		RCC->CFGR |= RCC_CFGR_ADCPRE_DIV8;
- 80005fe:	4b08      	ldr	r3, [pc, #32]	; (8000620 <_ZN12ClockControl17Set_ADC_PrescalerEt+0x7c>)
- 8000600:	685b      	ldr	r3, [r3, #4]
- 8000602:	4a07      	ldr	r2, [pc, #28]	; (8000620 <_ZN12ClockControl17Set_ADC_PrescalerEt+0x7c>)
- 8000604:	f443 4340 	orr.w	r3, r3, #49152	; 0xc000
- 8000608:	6053      	str	r3, [r2, #4]
+ 800064a:	4b08      	ldr	r3, [pc, #32]	; (800066c <_ZN12ClockControl17Set_ADC_PrescalerEt+0x7c>)
+ 800064c:	685b      	ldr	r3, [r3, #4]
+ 800064e:	4a07      	ldr	r2, [pc, #28]	; (800066c <_ZN12ClockControl17Set_ADC_PrescalerEt+0x7c>)
+ 8000650:	f443 4340 	orr.w	r3, r3, #49152	; 0xc000
+ 8000654:	6053      	str	r3, [r2, #4]
 		break;
- 800060a:	e004      	b.n	8000616 <_ZN12ClockControl17Set_ADC_PrescalerEt+0x72>
+ 8000656:	e004      	b.n	8000662 <_ZN12ClockControl17Set_ADC_PrescalerEt+0x72>
 	default:
 		RCC->CFGR |= RCC_CFGR_ADCPRE_DIV2;
- 800060c:	4b04      	ldr	r3, [pc, #16]	; (8000620 <_ZN12ClockControl17Set_ADC_PrescalerEt+0x7c>)
- 800060e:	4a04      	ldr	r2, [pc, #16]	; (8000620 <_ZN12ClockControl17Set_ADC_PrescalerEt+0x7c>)
- 8000610:	685b      	ldr	r3, [r3, #4]
- 8000612:	6053      	str	r3, [r2, #4]
+ 8000658:	4b04      	ldr	r3, [pc, #16]	; (800066c <_ZN12ClockControl17Set_ADC_PrescalerEt+0x7c>)
+ 800065a:	4a04      	ldr	r2, [pc, #16]	; (800066c <_ZN12ClockControl17Set_ADC_PrescalerEt+0x7c>)
+ 800065c:	685b      	ldr	r3, [r3, #4]
+ 800065e:	6053      	str	r3, [r2, #4]
 	}		
 }
- 8000614:	bf00      	nop
- 8000616:	bf00      	nop
- 8000618:	370c      	adds	r7, #12
- 800061a:	46bd      	mov	sp, r7
- 800061c:	bc80      	pop	{r7}
- 800061e:	4770      	bx	lr
- 8000620:	40021000 	.word	0x40021000
+ 8000660:	bf00      	nop
+ 8000662:	bf00      	nop
+ 8000664:	370c      	adds	r7, #12
+ 8000666:	46bd      	mov	sp, r7
+ 8000668:	bc80      	pop	{r7}
+ 800066a:	4770      	bx	lr
+ 800066c:	40021000 	.word	0x40021000
 
-08000624 <_ZN12ClockControl3HSE9Start_HSEEv>:
+08000670 <_ZN12ClockControl3HSE9Start_HSEEv>:
 	RCC->CFGR &= ~RCC_CFGR_USBPRE;
 }
 
 
 bool ClockControl::HSE::Start_HSE()
 {
- 8000624:	b480      	push	{r7}
- 8000626:	b083      	sub	sp, #12
- 8000628:	af00      	add	r7, sp, #0
+ 8000670:	b480      	push	{r7}
+ 8000672:	b083      	sub	sp, #12
+ 8000674:	af00      	add	r7, sp, #0
 	RCC->CR |= RCC_CR_HSEON;
- 800062a:	4b12      	ldr	r3, [pc, #72]	; (8000674 <_ZN12ClockControl3HSE9Start_HSEEv+0x50>)
- 800062c:	681b      	ldr	r3, [r3, #0]
- 800062e:	4a11      	ldr	r2, [pc, #68]	; (8000674 <_ZN12ClockControl3HSE9Start_HSEEv+0x50>)
- 8000630:	f443 3380 	orr.w	r3, r3, #65536	; 0x10000
- 8000634:	6013      	str	r3, [r2, #0]
+ 8000676:	4b12      	ldr	r3, [pc, #72]	; (80006c0 <_ZN12ClockControl3HSE9Start_HSEEv+0x50>)
+ 8000678:	681b      	ldr	r3, [r3, #0]
+ 800067a:	4a11      	ldr	r2, [pc, #68]	; (80006c0 <_ZN12ClockControl3HSE9Start_HSEEv+0x50>)
+ 800067c:	f443 3380 	orr.w	r3, r3, #65536	; 0x10000
+ 8000680:	6013      	str	r3, [r2, #0]
 
 	for (int StartUpCounter = 0;; StartUpCounter++)
- 8000636:	2300      	movs	r3, #0
- 8000638:	607b      	str	r3, [r7, #4]
+ 8000682:	2300      	movs	r3, #0
+ 8000684:	607b      	str	r3, [r7, #4]
 	{
 		if (StartUpCounter > 0x1000)
- 800063a:	687b      	ldr	r3, [r7, #4]
- 800063c:	f5b3 5f80 	cmp.w	r3, #4096	; 0x1000
- 8000640:	dd01      	ble.n	8000646 <_ZN12ClockControl3HSE9Start_HSEEv+0x22>
+ 8000686:	687b      	ldr	r3, [r7, #4]
+ 8000688:	f5b3 5f80 	cmp.w	r3, #4096	; 0x1000
+ 800068c:	dd01      	ble.n	8000692 <_ZN12ClockControl3HSE9Start_HSEEv+0x22>
 			return 0;
- 8000642:	2300      	movs	r3, #0
- 8000644:	e010      	b.n	8000668 <_ZN12ClockControl3HSE9Start_HSEEv+0x44>
+ 800068e:	2300      	movs	r3, #0
+ 8000690:	e010      	b.n	80006b4 <_ZN12ClockControl3HSE9Start_HSEEv+0x44>
 		else if (RCC->CR & RCC_CR_HSERDY)
- 8000646:	4b0b      	ldr	r3, [pc, #44]	; (8000674 <_ZN12ClockControl3HSE9Start_HSEEv+0x50>)
- 8000648:	681b      	ldr	r3, [r3, #0]
- 800064a:	f403 3300 	and.w	r3, r3, #131072	; 0x20000
- 800064e:	2b00      	cmp	r3, #0
- 8000650:	bf14      	ite	ne
- 8000652:	2301      	movne	r3, #1
- 8000654:	2300      	moveq	r3, #0
- 8000656:	b2db      	uxtb	r3, r3
- 8000658:	2b00      	cmp	r3, #0
- 800065a:	d001      	beq.n	8000660 <_ZN12ClockControl3HSE9Start_HSEEv+0x3c>
+ 8000692:	4b0b      	ldr	r3, [pc, #44]	; (80006c0 <_ZN12ClockControl3HSE9Start_HSEEv+0x50>)
+ 8000694:	681b      	ldr	r3, [r3, #0]
+ 8000696:	f403 3300 	and.w	r3, r3, #131072	; 0x20000
+ 800069a:	2b00      	cmp	r3, #0
+ 800069c:	bf14      	ite	ne
+ 800069e:	2301      	movne	r3, #1
+ 80006a0:	2300      	moveq	r3, #0
+ 80006a2:	b2db      	uxtb	r3, r3
+ 80006a4:	2b00      	cmp	r3, #0
+ 80006a6:	d001      	beq.n	80006ac <_ZN12ClockControl3HSE9Start_HSEEv+0x3c>
 			return 1;
- 800065c:	2301      	movs	r3, #1
- 800065e:	e003      	b.n	8000668 <_ZN12ClockControl3HSE9Start_HSEEv+0x44>
+ 80006a8:	2301      	movs	r3, #1
+ 80006aa:	e003      	b.n	80006b4 <_ZN12ClockControl3HSE9Start_HSEEv+0x44>
 	for (int StartUpCounter = 0;; StartUpCounter++)
- 8000660:	687b      	ldr	r3, [r7, #4]
- 8000662:	3301      	adds	r3, #1
- 8000664:	607b      	str	r3, [r7, #4]
+ 80006ac:	687b      	ldr	r3, [r7, #4]
+ 80006ae:	3301      	adds	r3, #1
+ 80006b0:	607b      	str	r3, [r7, #4]
 		if (StartUpCounter > 0x1000)
- 8000666:	e7e8      	b.n	800063a <_ZN12ClockControl3HSE9Start_HSEEv+0x16>
+ 80006b2:	e7e8      	b.n	8000686 <_ZN12ClockControl3HSE9Start_HSEEv+0x16>
 	}
 }
- 8000668:	4618      	mov	r0, r3
- 800066a:	370c      	adds	r7, #12
- 800066c:	46bd      	mov	sp, r7
- 800066e:	bc80      	pop	{r7}
- 8000670:	4770      	bx	lr
- 8000672:	bf00      	nop
- 8000674:	40021000 	.word	0x40021000
+ 80006b4:	4618      	mov	r0, r3
+ 80006b6:	370c      	adds	r7, #12
+ 80006b8:	46bd      	mov	sp, r7
+ 80006ba:	bc80      	pop	{r7}
+ 80006bc:	4770      	bx	lr
+ 80006be:	bf00      	nop
+ 80006c0:	40021000 	.word	0x40021000
 
-08000678 <_ZN12ClockControl3HSE3PLL14Set_PLLSRC_HSEEv>:
+080006c4 <_ZN12ClockControl3HSE3PLL14Set_PLLSRC_HSEEv>:
 void ClockControl::HSE::Stop_HSE()
 {
 	RCC->CR &= ~RCC_CR_HSEON;
 }
 void ClockControl::HSE::PLL::Set_PLLSRC_HSE()
 {
- 8000678:	b480      	push	{r7}
- 800067a:	af00      	add	r7, sp, #0
+ 80006c4:	b480      	push	{r7}
+ 80006c6:	af00      	add	r7, sp, #0
 	RCC->CFGR |= RCC_CFGR_PLLSRC;
- 800067c:	4b04      	ldr	r3, [pc, #16]	; (8000690 <_ZN12ClockControl3HSE3PLL14Set_PLLSRC_HSEEv+0x18>)
- 800067e:	685b      	ldr	r3, [r3, #4]
- 8000680:	4a03      	ldr	r2, [pc, #12]	; (8000690 <_ZN12ClockControl3HSE3PLL14Set_PLLSRC_HSEEv+0x18>)
- 8000682:	f443 3380 	orr.w	r3, r3, #65536	; 0x10000
- 8000686:	6053      	str	r3, [r2, #4]
+ 80006c8:	4b04      	ldr	r3, [pc, #16]	; (80006dc <_ZN12ClockControl3HSE3PLL14Set_PLLSRC_HSEEv+0x18>)
+ 80006ca:	685b      	ldr	r3, [r3, #4]
+ 80006cc:	4a03      	ldr	r2, [pc, #12]	; (80006dc <_ZN12ClockControl3HSE3PLL14Set_PLLSRC_HSEEv+0x18>)
+ 80006ce:	f443 3380 	orr.w	r3, r3, #65536	; 0x10000
+ 80006d2:	6053      	str	r3, [r2, #4]
 }
- 8000688:	bf00      	nop
- 800068a:	46bd      	mov	sp, r7
- 800068c:	bc80      	pop	{r7}
- 800068e:	4770      	bx	lr
- 8000690:	40021000 	.word	0x40021000
+ 80006d4:	bf00      	nop
+ 80006d6:	46bd      	mov	sp, r7
+ 80006d8:	bc80      	pop	{r7}
+ 80006da:	4770      	bx	lr
+ 80006dc:	40021000 	.word	0x40021000
 
-08000694 <_ZN12ClockControl3HSE3PLL14Clean_PLLXTPREEv>:
+080006e0 <_ZN12ClockControl3HSE3PLL14Clean_PLLXTPREEv>:
 void ClockControl::HSE::PLL::Set_PLLXTPRE()
 {
 	RCC->CFGR |= (1 << RCC_CFGR_PLLXTPRE_Pos);
 }
 void ClockControl::HSE::PLL::Clean_PLLXTPRE()
 {
- 8000694:	b480      	push	{r7}
- 8000696:	af00      	add	r7, sp, #0
+ 80006e0:	b480      	push	{r7}
+ 80006e2:	af00      	add	r7, sp, #0
 	RCC->CFGR &= ~(0 << RCC_CFGR_PLLXTPRE_Pos);
- 8000698:	4b03      	ldr	r3, [pc, #12]	; (80006a8 <_ZN12ClockControl3HSE3PLL14Clean_PLLXTPREEv+0x14>)
- 800069a:	4a03      	ldr	r2, [pc, #12]	; (80006a8 <_ZN12ClockControl3HSE3PLL14Clean_PLLXTPREEv+0x14>)
- 800069c:	685b      	ldr	r3, [r3, #4]
- 800069e:	6053      	str	r3, [r2, #4]
+ 80006e4:	4b03      	ldr	r3, [pc, #12]	; (80006f4 <_ZN12ClockControl3HSE3PLL14Clean_PLLXTPREEv+0x14>)
+ 80006e6:	4a03      	ldr	r2, [pc, #12]	; (80006f4 <_ZN12ClockControl3HSE3PLL14Clean_PLLXTPREEv+0x14>)
+ 80006e8:	685b      	ldr	r3, [r3, #4]
+ 80006ea:	6053      	str	r3, [r2, #4]
 }
- 80006a0:	bf00      	nop
- 80006a2:	46bd      	mov	sp, r7
- 80006a4:	bc80      	pop	{r7}
- 80006a6:	4770      	bx	lr
- 80006a8:	40021000 	.word	0x40021000
+ 80006ec:	bf00      	nop
+ 80006ee:	46bd      	mov	sp, r7
+ 80006f0:	bc80      	pop	{r7}
+ 80006f2:	4770      	bx	lr
+ 80006f4:	40021000 	.word	0x40021000
 
-080006ac <_ZN12ClockControl3HSE3PLL11Set_PLL_MULEt>:
+080006f8 <_ZN12ClockControl3HSE3PLL11Set_PLL_MULEt>:
 void ClockControl::HSE::PLL::Set_PLL_MUL(unsigned short PLL_MUL_Value)
 {
- 80006ac:	b480      	push	{r7}
- 80006ae:	b083      	sub	sp, #12
- 80006b0:	af00      	add	r7, sp, #0
- 80006b2:	4603      	mov	r3, r0
- 80006b4:	80fb      	strh	r3, [r7, #6]
+ 80006f8:	b480      	push	{r7}
+ 80006fa:	b083      	sub	sp, #12
+ 80006fc:	af00      	add	r7, sp, #0
+ 80006fe:	4603      	mov	r3, r0
+ 8000700:	80fb      	strh	r3, [r7, #6]
 	if (PLL_MUL_Value < 2)
- 80006b6:	88fb      	ldrh	r3, [r7, #6]
- 80006b8:	2b01      	cmp	r3, #1
- 80006ba:	d804      	bhi.n	80006c6 <_ZN12ClockControl3HSE3PLL11Set_PLL_MULEt+0x1a>
+ 8000702:	88fb      	ldrh	r3, [r7, #6]
+ 8000704:	2b01      	cmp	r3, #1
+ 8000706:	d804      	bhi.n	8000712 <_ZN12ClockControl3HSE3PLL11Set_PLL_MULEt+0x1a>
 	{
 		RCC->CFGR |= RCC_CFGR_PLLMULL2;
- 80006bc:	4b0e      	ldr	r3, [pc, #56]	; (80006f8 <_ZN12ClockControl3HSE3PLL11Set_PLL_MULEt+0x4c>)
- 80006be:	4a0e      	ldr	r2, [pc, #56]	; (80006f8 <_ZN12ClockControl3HSE3PLL11Set_PLL_MULEt+0x4c>)
- 80006c0:	685b      	ldr	r3, [r3, #4]
- 80006c2:	6053      	str	r3, [r2, #4]
+ 8000708:	4b0e      	ldr	r3, [pc, #56]	; (8000744 <_ZN12ClockControl3HSE3PLL11Set_PLL_MULEt+0x4c>)
+ 800070a:	4a0e      	ldr	r2, [pc, #56]	; (8000744 <_ZN12ClockControl3HSE3PLL11Set_PLL_MULEt+0x4c>)
+ 800070c:	685b      	ldr	r3, [r3, #4]
+ 800070e:	6053      	str	r3, [r2, #4]
 		else
 		{
 			RCC->CFGR |= ((PLL_MUL_Value - 2) << RCC_CFGR_PLLMULL_Pos);
 		}
 	}
 }
- 80006c4:	e012      	b.n	80006ec <_ZN12ClockControl3HSE3PLL11Set_PLL_MULEt+0x40>
+ 8000710:	e012      	b.n	8000738 <_ZN12ClockControl3HSE3PLL11Set_PLL_MULEt+0x40>
 		if (PLL_MUL_Value > 0b1111)
- 80006c6:	88fb      	ldrh	r3, [r7, #6]
- 80006c8:	2b0f      	cmp	r3, #15
- 80006ca:	d906      	bls.n	80006da <_ZN12ClockControl3HSE3PLL11Set_PLL_MULEt+0x2e>
+ 8000712:	88fb      	ldrh	r3, [r7, #6]
+ 8000714:	2b0f      	cmp	r3, #15
+ 8000716:	d906      	bls.n	8000726 <_ZN12ClockControl3HSE3PLL11Set_PLL_MULEt+0x2e>
 			RCC->CFGR |= RCC_CFGR_PLLMULL16;
- 80006cc:	4b0a      	ldr	r3, [pc, #40]	; (80006f8 <_ZN12ClockControl3HSE3PLL11Set_PLL_MULEt+0x4c>)
- 80006ce:	685b      	ldr	r3, [r3, #4]
- 80006d0:	4a09      	ldr	r2, [pc, #36]	; (80006f8 <_ZN12ClockControl3HSE3PLL11Set_PLL_MULEt+0x4c>)
- 80006d2:	f443 1360 	orr.w	r3, r3, #3670016	; 0x380000
- 80006d6:	6053      	str	r3, [r2, #4]
+ 8000718:	4b0a      	ldr	r3, [pc, #40]	; (8000744 <_ZN12ClockControl3HSE3PLL11Set_PLL_MULEt+0x4c>)
+ 800071a:	685b      	ldr	r3, [r3, #4]
+ 800071c:	4a09      	ldr	r2, [pc, #36]	; (8000744 <_ZN12ClockControl3HSE3PLL11Set_PLL_MULEt+0x4c>)
+ 800071e:	f443 1360 	orr.w	r3, r3, #3670016	; 0x380000
+ 8000722:	6053      	str	r3, [r2, #4]
 }
- 80006d8:	e008      	b.n	80006ec <_ZN12ClockControl3HSE3PLL11Set_PLL_MULEt+0x40>
+ 8000724:	e008      	b.n	8000738 <_ZN12ClockControl3HSE3PLL11Set_PLL_MULEt+0x40>
 			RCC->CFGR |= ((PLL_MUL_Value - 2) << RCC_CFGR_PLLMULL_Pos);
- 80006da:	4b07      	ldr	r3, [pc, #28]	; (80006f8 <_ZN12ClockControl3HSE3PLL11Set_PLL_MULEt+0x4c>)
- 80006dc:	685b      	ldr	r3, [r3, #4]
- 80006de:	88fa      	ldrh	r2, [r7, #6]
- 80006e0:	3a02      	subs	r2, #2
- 80006e2:	0492      	lsls	r2, r2, #18
- 80006e4:	4611      	mov	r1, r2
- 80006e6:	4a04      	ldr	r2, [pc, #16]	; (80006f8 <_ZN12ClockControl3HSE3PLL11Set_PLL_MULEt+0x4c>)
- 80006e8:	430b      	orrs	r3, r1
- 80006ea:	6053      	str	r3, [r2, #4]
+ 8000726:	4b07      	ldr	r3, [pc, #28]	; (8000744 <_ZN12ClockControl3HSE3PLL11Set_PLL_MULEt+0x4c>)
+ 8000728:	685b      	ldr	r3, [r3, #4]
+ 800072a:	88fa      	ldrh	r2, [r7, #6]
+ 800072c:	3a02      	subs	r2, #2
+ 800072e:	0492      	lsls	r2, r2, #18
+ 8000730:	4611      	mov	r1, r2
+ 8000732:	4a04      	ldr	r2, [pc, #16]	; (8000744 <_ZN12ClockControl3HSE3PLL11Set_PLL_MULEt+0x4c>)
+ 8000734:	430b      	orrs	r3, r1
+ 8000736:	6053      	str	r3, [r2, #4]
 }
- 80006ec:	bf00      	nop
- 80006ee:	370c      	adds	r7, #12
- 80006f0:	46bd      	mov	sp, r7
- 80006f2:	bc80      	pop	{r7}
- 80006f4:	4770      	bx	lr
- 80006f6:	bf00      	nop
- 80006f8:	40021000 	.word	0x40021000
+ 8000738:	bf00      	nop
+ 800073a:	370c      	adds	r7, #12
+ 800073c:	46bd      	mov	sp, r7
+ 800073e:	bc80      	pop	{r7}
+ 8000740:	4770      	bx	lr
+ 8000742:	bf00      	nop
+ 8000744:	40021000 	.word	0x40021000
 
-080006fc <_ZN12ClockControl3HSE3PLL9Start_PLLEv>:
+08000748 <_ZN12ClockControl3HSE3PLL9Start_PLLEv>:
 bool ClockControl::HSE::PLL::Start_PLL()
 {
- 80006fc:	b480      	push	{r7}
- 80006fe:	b083      	sub	sp, #12
- 8000700:	af00      	add	r7, sp, #0
+ 8000748:	b480      	push	{r7}
+ 800074a:	b083      	sub	sp, #12
+ 800074c:	af00      	add	r7, sp, #0
 	RCC->CR |= RCC_CR_PLLON;
- 8000702:	4b12      	ldr	r3, [pc, #72]	; (800074c <_ZN12ClockControl3HSE3PLL9Start_PLLEv+0x50>)
- 8000704:	681b      	ldr	r3, [r3, #0]
- 8000706:	4a11      	ldr	r2, [pc, #68]	; (800074c <_ZN12ClockControl3HSE3PLL9Start_PLLEv+0x50>)
- 8000708:	f043 7380 	orr.w	r3, r3, #16777216	; 0x1000000
- 800070c:	6013      	str	r3, [r2, #0]
+ 800074e:	4b12      	ldr	r3, [pc, #72]	; (8000798 <_ZN12ClockControl3HSE3PLL9Start_PLLEv+0x50>)
+ 8000750:	681b      	ldr	r3, [r3, #0]
+ 8000752:	4a11      	ldr	r2, [pc, #68]	; (8000798 <_ZN12ClockControl3HSE3PLL9Start_PLLEv+0x50>)
+ 8000754:	f043 7380 	orr.w	r3, r3, #16777216	; 0x1000000
+ 8000758:	6013      	str	r3, [r2, #0]
 
 	for (int StartUpCounter = 0;; StartUpCounter++)
- 800070e:	2300      	movs	r3, #0
- 8000710:	607b      	str	r3, [r7, #4]
+ 800075a:	2300      	movs	r3, #0
+ 800075c:	607b      	str	r3, [r7, #4]
 	{
 		if (StartUpCounter > 0x1000)
- 8000712:	687b      	ldr	r3, [r7, #4]
- 8000714:	f5b3 5f80 	cmp.w	r3, #4096	; 0x1000
- 8000718:	dd01      	ble.n	800071e <_ZN12ClockControl3HSE3PLL9Start_PLLEv+0x22>
+ 800075e:	687b      	ldr	r3, [r7, #4]
+ 8000760:	f5b3 5f80 	cmp.w	r3, #4096	; 0x1000
+ 8000764:	dd01      	ble.n	800076a <_ZN12ClockControl3HSE3PLL9Start_PLLEv+0x22>
 			return 0;
- 800071a:	2300      	movs	r3, #0
- 800071c:	e010      	b.n	8000740 <_ZN12ClockControl3HSE3PLL9Start_PLLEv+0x44>
+ 8000766:	2300      	movs	r3, #0
+ 8000768:	e010      	b.n	800078c <_ZN12ClockControl3HSE3PLL9Start_PLLEv+0x44>
 		else if (RCC->CR & RCC_CR_PLLRDY)
- 800071e:	4b0b      	ldr	r3, [pc, #44]	; (800074c <_ZN12ClockControl3HSE3PLL9Start_PLLEv+0x50>)
- 8000720:	681b      	ldr	r3, [r3, #0]
- 8000722:	f003 7300 	and.w	r3, r3, #33554432	; 0x2000000
- 8000726:	2b00      	cmp	r3, #0
- 8000728:	bf14      	ite	ne
- 800072a:	2301      	movne	r3, #1
- 800072c:	2300      	moveq	r3, #0
- 800072e:	b2db      	uxtb	r3, r3
- 8000730:	2b00      	cmp	r3, #0
- 8000732:	d001      	beq.n	8000738 <_ZN12ClockControl3HSE3PLL9Start_PLLEv+0x3c>
+ 800076a:	4b0b      	ldr	r3, [pc, #44]	; (8000798 <_ZN12ClockControl3HSE3PLL9Start_PLLEv+0x50>)
+ 800076c:	681b      	ldr	r3, [r3, #0]
+ 800076e:	f003 7300 	and.w	r3, r3, #33554432	; 0x2000000
+ 8000772:	2b00      	cmp	r3, #0
+ 8000774:	bf14      	ite	ne
+ 8000776:	2301      	movne	r3, #1
+ 8000778:	2300      	moveq	r3, #0
+ 800077a:	b2db      	uxtb	r3, r3
+ 800077c:	2b00      	cmp	r3, #0
+ 800077e:	d001      	beq.n	8000784 <_ZN12ClockControl3HSE3PLL9Start_PLLEv+0x3c>
 			return 1;
- 8000734:	2301      	movs	r3, #1
- 8000736:	e003      	b.n	8000740 <_ZN12ClockControl3HSE3PLL9Start_PLLEv+0x44>
+ 8000780:	2301      	movs	r3, #1
+ 8000782:	e003      	b.n	800078c <_ZN12ClockControl3HSE3PLL9Start_PLLEv+0x44>
 	for (int StartUpCounter = 0;; StartUpCounter++)
- 8000738:	687b      	ldr	r3, [r7, #4]
- 800073a:	3301      	adds	r3, #1
- 800073c:	607b      	str	r3, [r7, #4]
+ 8000784:	687b      	ldr	r3, [r7, #4]
+ 8000786:	3301      	adds	r3, #1
+ 8000788:	607b      	str	r3, [r7, #4]
 		if (StartUpCounter > 0x1000)
- 800073e:	e7e8      	b.n	8000712 <_ZN12ClockControl3HSE3PLL9Start_PLLEv+0x16>
+ 800078a:	e7e8      	b.n	800075e <_ZN12ClockControl3HSE3PLL9Start_PLLEv+0x16>
 	}
 }
- 8000740:	4618      	mov	r0, r3
- 8000742:	370c      	adds	r7, #12
- 8000744:	46bd      	mov	sp, r7
- 8000746:	bc80      	pop	{r7}
- 8000748:	4770      	bx	lr
- 800074a:	bf00      	nop
- 800074c:	40021000 	.word	0x40021000
+ 800078c:	4618      	mov	r0, r3
+ 800078e:	370c      	adds	r7, #12
+ 8000790:	46bd      	mov	sp, r7
+ 8000792:	bc80      	pop	{r7}
+ 8000794:	4770      	bx	lr
+ 8000796:	bf00      	nop
+ 8000798:	40021000 	.word	0x40021000
 
-08000750 <_ZN12ClockControl3HSE3PLL10Set_SW_PLLEv>:
+0800079c <_ZN12ClockControl3HSE3PLL10Set_SW_PLLEv>:
 void ClockControl::HSE::PLL::Set_SW_PLL()
 {
- 8000750:	b480      	push	{r7}
- 8000752:	af00      	add	r7, sp, #0
+ 800079c:	b480      	push	{r7}
+ 800079e:	af00      	add	r7, sp, #0
 	RCC->CFGR |= RCC_CFGR_SW_PLL;
- 8000754:	4b04      	ldr	r3, [pc, #16]	; (8000768 <_ZN12ClockControl3HSE3PLL10Set_SW_PLLEv+0x18>)
- 8000756:	685b      	ldr	r3, [r3, #4]
- 8000758:	4a03      	ldr	r2, [pc, #12]	; (8000768 <_ZN12ClockControl3HSE3PLL10Set_SW_PLLEv+0x18>)
- 800075a:	f043 0302 	orr.w	r3, r3, #2
- 800075e:	6053      	str	r3, [r2, #4]
+ 80007a0:	4b04      	ldr	r3, [pc, #16]	; (80007b4 <_ZN12ClockControl3HSE3PLL10Set_SW_PLLEv+0x18>)
+ 80007a2:	685b      	ldr	r3, [r3, #4]
+ 80007a4:	4a03      	ldr	r2, [pc, #12]	; (80007b4 <_ZN12ClockControl3HSE3PLL10Set_SW_PLLEv+0x18>)
+ 80007a6:	f043 0302 	orr.w	r3, r3, #2
+ 80007aa:	6053      	str	r3, [r2, #4]
 }
- 8000760:	bf00      	nop
- 8000762:	46bd      	mov	sp, r7
- 8000764:	bc80      	pop	{r7}
- 8000766:	4770      	bx	lr
- 8000768:	40021000 	.word	0x40021000
+ 80007ac:	bf00      	nop
+ 80007ae:	46bd      	mov	sp, r7
+ 80007b0:	bc80      	pop	{r7}
+ 80007b2:	4770      	bx	lr
+ 80007b4:	40021000 	.word	0x40021000
 
-0800076c <Reset_Handler>:
+080007b8 <Reset_Handler>:
 
   .section .text.Reset_Handler
   .weak Reset_Handler
   .type Reset_Handler, %function
 Reset_Handler:
   ldr   r0, =_estack
- 800076c:	480d      	ldr	r0, [pc, #52]	; (80007a4 <LoopForever+0x2>)
+ 80007b8:	480d      	ldr	r0, [pc, #52]	; (80007f0 <LoopForever+0x2>)
   mov   sp, r0          /* set stack pointer */
- 800076e:	4685      	mov	sp, r0
+ 80007ba:	4685      	mov	sp, r0
 /* Call the clock system initialization function.*/
   bl  SystemInit
- 8000770:	f7ff fdd8 	bl	8000324 <SystemInit>
+ 80007bc:	f7ff fdd8 	bl	8000370 <SystemInit>
 
 /* Copy the data segment initializers from flash to SRAM */
   ldr r0, =_sdata
- 8000774:	480c      	ldr	r0, [pc, #48]	; (80007a8 <LoopForever+0x6>)
+ 80007c0:	480c      	ldr	r0, [pc, #48]	; (80007f4 <LoopForever+0x6>)
   ldr r1, =_edata
- 8000776:	490d      	ldr	r1, [pc, #52]	; (80007ac <LoopForever+0xa>)
+ 80007c2:	490d      	ldr	r1, [pc, #52]	; (80007f8 <LoopForever+0xa>)
   ldr r2, =_sidata
- 8000778:	4a0d      	ldr	r2, [pc, #52]	; (80007b0 <LoopForever+0xe>)
+ 80007c4:	4a0d      	ldr	r2, [pc, #52]	; (80007fc <LoopForever+0xe>)
   movs r3, #0
- 800077a:	2300      	movs	r3, #0
+ 80007c6:	2300      	movs	r3, #0
   b LoopCopyDataInit
- 800077c:	e002      	b.n	8000784 <LoopCopyDataInit>
+ 80007c8:	e002      	b.n	80007d0 <LoopCopyDataInit>
 
-0800077e <CopyDataInit>:
+080007ca <CopyDataInit>:
 
 CopyDataInit:
   ldr r4, [r2, r3]
- 800077e:	58d4      	ldr	r4, [r2, r3]
+ 80007ca:	58d4      	ldr	r4, [r2, r3]
   str r4, [r0, r3]
- 8000780:	50c4      	str	r4, [r0, r3]
+ 80007cc:	50c4      	str	r4, [r0, r3]
   adds r3, r3, #4
- 8000782:	3304      	adds	r3, #4
+ 80007ce:	3304      	adds	r3, #4
 
-08000784 <LoopCopyDataInit>:
+080007d0 <LoopCopyDataInit>:
 
 LoopCopyDataInit:
   adds r4, r0, r3
- 8000784:	18c4      	adds	r4, r0, r3
+ 80007d0:	18c4      	adds	r4, r0, r3
   cmp r4, r1
- 8000786:	428c      	cmp	r4, r1
+ 80007d2:	428c      	cmp	r4, r1
   bcc CopyDataInit
- 8000788:	d3f9      	bcc.n	800077e <CopyDataInit>
+ 80007d4:	d3f9      	bcc.n	80007ca <CopyDataInit>
 
 /* Zero fill the bss segment. */
   ldr r2, =_sbss
- 800078a:	4a0a      	ldr	r2, [pc, #40]	; (80007b4 <LoopForever+0x12>)
+ 80007d6:	4a0a      	ldr	r2, [pc, #40]	; (8000800 <LoopForever+0x12>)
   ldr r4, =_ebss
- 800078c:	4c0a      	ldr	r4, [pc, #40]	; (80007b8 <LoopForever+0x16>)
+ 80007d8:	4c0a      	ldr	r4, [pc, #40]	; (8000804 <LoopForever+0x16>)
   movs r3, #0
- 800078e:	2300      	movs	r3, #0
+ 80007da:	2300      	movs	r3, #0
   b LoopFillZerobss
- 8000790:	e001      	b.n	8000796 <LoopFillZerobss>
+ 80007dc:	e001      	b.n	80007e2 <LoopFillZerobss>
 
-08000792 <FillZerobss>:
+080007de <FillZerobss>:
 
 FillZerobss:
   str  r3, [r2]
- 8000792:	6013      	str	r3, [r2, #0]
+ 80007de:	6013      	str	r3, [r2, #0]
   adds r2, r2, #4
- 8000794:	3204      	adds	r2, #4
+ 80007e0:	3204      	adds	r2, #4
 
-08000796 <LoopFillZerobss>:
+080007e2 <LoopFillZerobss>:
 
 LoopFillZerobss:
   cmp r2, r4
- 8000796:	42a2      	cmp	r2, r4
+ 80007e2:	42a2      	cmp	r2, r4
   bcc FillZerobss
- 8000798:	d3fb      	bcc.n	8000792 <FillZerobss>
+ 80007e4:	d3fb      	bcc.n	80007de <FillZerobss>
 
 /* Call static constructors */
   bl __libc_init_array
- 800079a:	f000 f811 	bl	80007c0 <__libc_init_array>
+ 80007e6:	f000 f811 	bl	800080c <__libc_init_array>
 /* Call the application's entry point.*/
   bl main
- 800079e:	f7ff fd7b 	bl	8000298 <main>
+ 80007ea:	f7ff fd55 	bl	8000298 <main>
 
-080007a2 <LoopForever>:
+080007ee <LoopForever>:
 
 LoopForever:
     b LoopForever
- 80007a2:	e7fe      	b.n	80007a2 <LoopForever>
+ 80007ee:	e7fe      	b.n	80007ee <LoopForever>
   ldr   r0, =_estack
- 80007a4:	20005000 	.word	0x20005000
+ 80007f0:	20005000 	.word	0x20005000
   ldr r0, =_sdata
- 80007a8:	20000000 	.word	0x20000000
+ 80007f4:	20000000 	.word	0x20000000
   ldr r1, =_edata
- 80007ac:	20000000 	.word	0x20000000
+ 80007f8:	20000018 	.word	0x20000018
   ldr r2, =_sidata
- 80007b0:	08000828 	.word	0x08000828
+ 80007fc:	08000874 	.word	0x08000874
   ldr r2, =_sbss
- 80007b4:	20000000 	.word	0x20000000
+ 8000800:	20000018 	.word	0x20000018
   ldr r4, =_ebss
- 80007b8:	2000001c 	.word	0x2000001c
+ 8000804:	20000034 	.word	0x20000034
 
-080007bc <ADC1_2_IRQHandler>:
+08000808 <ADC1_2_IRQHandler>:
  * @retval : None
 */
   .section .text.Default_Handler,"ax",%progbits
 Default_Handler:
 Infinite_Loop:
   b Infinite_Loop
- 80007bc:	e7fe      	b.n	80007bc <ADC1_2_IRQHandler>
+ 8000808:	e7fe      	b.n	8000808 <ADC1_2_IRQHandler>
 	...
 
-080007c0 <__libc_init_array>:
- 80007c0:	b570      	push	{r4, r5, r6, lr}
- 80007c2:	2600      	movs	r6, #0
- 80007c4:	4d0c      	ldr	r5, [pc, #48]	; (80007f8 <__libc_init_array+0x38>)
- 80007c6:	4c0d      	ldr	r4, [pc, #52]	; (80007fc <__libc_init_array+0x3c>)
- 80007c8:	1b64      	subs	r4, r4, r5
- 80007ca:	10a4      	asrs	r4, r4, #2
- 80007cc:	42a6      	cmp	r6, r4
- 80007ce:	d109      	bne.n	80007e4 <__libc_init_array+0x24>
- 80007d0:	f000 f81a 	bl	8000808 <_init>
- 80007d4:	2600      	movs	r6, #0
- 80007d6:	4d0a      	ldr	r5, [pc, #40]	; (8000800 <__libc_init_array+0x40>)
- 80007d8:	4c0a      	ldr	r4, [pc, #40]	; (8000804 <__libc_init_array+0x44>)
- 80007da:	1b64      	subs	r4, r4, r5
- 80007dc:	10a4      	asrs	r4, r4, #2
- 80007de:	42a6      	cmp	r6, r4
- 80007e0:	d105      	bne.n	80007ee <__libc_init_array+0x2e>
- 80007e2:	bd70      	pop	{r4, r5, r6, pc}
- 80007e4:	f855 3b04 	ldr.w	r3, [r5], #4
- 80007e8:	4798      	blx	r3
- 80007ea:	3601      	adds	r6, #1
- 80007ec:	e7ee      	b.n	80007cc <__libc_init_array+0xc>
- 80007ee:	f855 3b04 	ldr.w	r3, [r5], #4
- 80007f2:	4798      	blx	r3
- 80007f4:	3601      	adds	r6, #1
- 80007f6:	e7f2      	b.n	80007de <__libc_init_array+0x1e>
- 80007f8:	08000820 	.word	0x08000820
- 80007fc:	08000820 	.word	0x08000820
- 8000800:	08000820 	.word	0x08000820
- 8000804:	08000824 	.word	0x08000824
+0800080c <__libc_init_array>:
+ 800080c:	b570      	push	{r4, r5, r6, lr}
+ 800080e:	2600      	movs	r6, #0
+ 8000810:	4d0c      	ldr	r5, [pc, #48]	; (8000844 <__libc_init_array+0x38>)
+ 8000812:	4c0d      	ldr	r4, [pc, #52]	; (8000848 <__libc_init_array+0x3c>)
+ 8000814:	1b64      	subs	r4, r4, r5
+ 8000816:	10a4      	asrs	r4, r4, #2
+ 8000818:	42a6      	cmp	r6, r4
+ 800081a:	d109      	bne.n	8000830 <__libc_init_array+0x24>
+ 800081c:	f000 f81a 	bl	8000854 <_init>
+ 8000820:	2600      	movs	r6, #0
+ 8000822:	4d0a      	ldr	r5, [pc, #40]	; (800084c <__libc_init_array+0x40>)
+ 8000824:	4c0a      	ldr	r4, [pc, #40]	; (8000850 <__libc_init_array+0x44>)
+ 8000826:	1b64      	subs	r4, r4, r5
+ 8000828:	10a4      	asrs	r4, r4, #2
+ 800082a:	42a6      	cmp	r6, r4
+ 800082c:	d105      	bne.n	800083a <__libc_init_array+0x2e>
+ 800082e:	bd70      	pop	{r4, r5, r6, pc}
+ 8000830:	f855 3b04 	ldr.w	r3, [r5], #4
+ 8000834:	4798      	blx	r3
+ 8000836:	3601      	adds	r6, #1
+ 8000838:	e7ee      	b.n	8000818 <__libc_init_array+0xc>
+ 800083a:	f855 3b04 	ldr.w	r3, [r5], #4
+ 800083e:	4798      	blx	r3
+ 8000840:	3601      	adds	r6, #1
+ 8000842:	e7f2      	b.n	800082a <__libc_init_array+0x1e>
+ 8000844:	0800086c 	.word	0x0800086c
+ 8000848:	0800086c 	.word	0x0800086c
+ 800084c:	0800086c 	.word	0x0800086c
+ 8000850:	08000870 	.word	0x08000870
 
-08000808 <_init>:
- 8000808:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 800080a:	bf00      	nop
- 800080c:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 800080e:	bc08      	pop	{r3}
- 8000810:	469e      	mov	lr, r3
- 8000812:	4770      	bx	lr
+08000854 <_init>:
+ 8000854:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 8000856:	bf00      	nop
+ 8000858:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 800085a:	bc08      	pop	{r3}
+ 800085c:	469e      	mov	lr, r3
+ 800085e:	4770      	bx	lr
 
-08000814 <_fini>:
- 8000814:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 8000816:	bf00      	nop
- 8000818:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 800081a:	bc08      	pop	{r3}
- 800081c:	469e      	mov	lr, r3
- 800081e:	4770      	bx	lr
+08000860 <_fini>:
+ 8000860:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 8000862:	bf00      	nop
+ 8000864:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 8000866:	bc08      	pop	{r3}
+ 8000868:	469e      	mov	lr, r3
+ 800086a:	4770      	bx	lr
