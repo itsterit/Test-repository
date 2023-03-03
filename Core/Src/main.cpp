@@ -23,16 +23,16 @@
 #include "main.h"
 #include <ClockControl/ClockControl.h>
 
-short Uart2_Cond        = 1;
-short Uart2_Counter     = 0;
-short Uart2_Len         = 0;
+short Uart2_Cond = 1;
+short Uart2_Counter = 0;
+short Uart2_Len = 0;
 char Uart2_BufSend[100] = {0};
 
 char LibA[10] = {'A', '\n'};
 
 int main(void)
-{ 
- /**
+{
+  /**
    * @brief   Start HSI clock
    *
    * @details Returns 1 if launch is successful
@@ -71,9 +71,36 @@ int main(void)
 
   PinSet();
 
+  /**
+   * @brief: Start DMA ini
+   */
+  RCC->AHBENR |= RCC_AHBENR_DMA1EN;
+  DMA1->ISR = 0x00;                    // DMA interrupt status register
+  DMA1->IFCR = 0x00;                   // DMA interrupt flag clear register
+  
+  DMA1_Channel1->CCR = 0x00;
+  DMA1_Channel1->CCR |= (00 << DMA_CCR_MEM2MEM_Pos)  // Memory to memory mode disabled
+  | (00 << DMA_CCR_PL_Pos)                           // Channel priority level
+  | (00 << DMA_CCR_MSIZE_Pos)                        // Memory size
+  | (00 << DMA_CCR_MSIZE_Pos)                        // Memory size
+  | (00 << DMA_CCR_PSIZE_Pos)                        // Peripheral size
+  | (00 << DMA_CCR_MINC_Pos)                         // Memory increment mode
+  | (00 << DMA_CCR_PINC_Pos)                         // Peripheral increment mode
+  | (00 << DMA_CCR_CIRC_Pos)                         // Circular mode
+  | (00 << DMA_CCR_DIR_Pos)                          // Data transfer direction
+  | (00 << DMA_CCR_TEIE_Pos)                         // Transfer error interrupt enable
+  | (00 << DMA_CCR_HTIE_Pos)                         // Half transfer interrupt enable
+  | (00 << DMA_CCR_TCIE_Pos)                         // Transfer complete interrupt enable
+  | (00 << DMA_CCR_EN_Pos);                          // Channel enable
+
+  DMA1_Channel1->CNDTR = 0x00;                      // сколько кадров данных подлежит передаче 
+  DMA1_Channel1->CPAR  = 0x00;                      // адрес памяти
+  DMA1_Channel1->CPAR  = 0x00;                      // адрес периферийного устройства
+
+
   while (1)
-  {    
-    GPIOC->ODR ^= GPIO_ODR_ODR13;    
+  {
+    GPIOC->ODR ^= GPIO_ODR_ODR13;
 
     USART2->SR = 0x00;
     USART2->CR1 |= USART_CR1_TCIE;
