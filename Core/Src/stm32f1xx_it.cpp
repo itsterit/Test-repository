@@ -32,11 +32,23 @@ extern "C"
         if (ADC1->SR & ADC_SR_EOC)
         {
             char buf[100];
-            sprintf(buf, "V-> %ld \n\r", (ADC1->DR) * 3000 / 4096 );
+            sprintf(buf, " ADC1_2_IRQHandler-> %ld \n\r", (ADC1->DR) * 3000 / 4096 );
             Uart2_StrWrite(buf);
         }
 
         ADC1->SR = 0x00;
+    }
+
+    void DMA1_Channel1_IRQHandler(void)
+    {
+        GPIOC->ODR ^= GPIO_ODR_ODR13;
+        char buf[100];
+        sprintf(buf, " DMAChannel1_IRQHandler-> %d \n\r", (i) * 3000 / 4096 );
+        Uart2_StrWrite(buf);
+        
+        DMA1->ISR  = 0x00;
+        DMA1->IFCR = 0x00;
+        DMA1_Channel1->CCR = 0x00;
     }
 
     void TIM1_UP_IRQHandler(void)
