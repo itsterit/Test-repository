@@ -35,5 +35,6 @@ Core/Src \
 Drivers/CMSIS/src \
 Library/ClockControl \
 Library/DmaControl \
+Library/UartWrap \
 Startup \
 

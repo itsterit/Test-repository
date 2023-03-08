@@ -23,11 +23,7 @@
 #include "main.h"
 #include <ClockControl/ClockControl.h>
 #include <DmaControl/DmaControl.h>
-
-short Uart2_Cond = 1;
-short Uart2_Counter = 0;
-short Uart2_Len = 0;
-char Uart2_BufSend[100] = {0};
+#include <UartWrap/Uart.h>
 
 int main(void)
 {
@@ -72,17 +68,17 @@ int main(void)
 
   DMA_Config DMA_Ch1_cfg;
   DMA_Ch1_cfg.MEM2MEM = MEM2MEM_Disabled;
-  DMA_Ch1_cfg.PL = PL_High;
-  DMA_Ch1_cfg.MSIZE = MSIZE_8bits;
-  DMA_Ch1_cfg.PSIZE = PSIZE_8bits;
-  DMA_Ch1_cfg.MINC = MINC_Disabled;
-  DMA_Ch1_cfg.PINC = PINC_Disabled;
-  DMA_Ch1_cfg.CIRC = CIRC_Disabled;
-  DMA_Ch1_cfg.DIR = DIR_From_Memory;
-  DMA_Ch1_cfg.TEIE = TEIE_Disabled;
-  DMA_Ch1_cfg.HTIE = HTIE_Disabled;
-  DMA_Ch1_cfg.TCIE = TCIE_Disabled;
-  DMA_Ch1_cfg.EN = EN_Disabled;
+  DMA_Ch1_cfg.PL      = PL_High;
+  DMA_Ch1_cfg.MSIZE   = MSIZE_8bits;
+  DMA_Ch1_cfg.PSIZE   = PSIZE_8bits;
+  DMA_Ch1_cfg.MINC    = MINC_Disabled;
+  DMA_Ch1_cfg.PINC    = PINC_Disabled;
+  DMA_Ch1_cfg.CIRC    = CIRC_Disabled;
+  DMA_Ch1_cfg.DIR     = DIR_From_Memory;
+  DMA_Ch1_cfg.TEIE    = TEIE_Disabled;
+  DMA_Ch1_cfg.HTIE    = HTIE_Disabled;
+  DMA_Ch1_cfg.TCIE    = TCIE_Disabled;
+  DMA_Ch1_cfg.EN      = EN_Disabled;
   DmaControl Dma_Ch1(DMA1, DMA1_Channel1, &DMA_Ch1_cfg);
 
   /**
@@ -90,12 +86,12 @@ int main(void)
    */
   PinSet();
   Uart2_Ini(USART2, 24000000, 9600);
+  ADC1_IN9_PB1_ini();
 
   while (1)
   {
     GPIOC->ODR ^= GPIO_ODR_ODR13;
-
-    Uart2_StrWrite("Hello\n\r");
+    ADC1->CR2 |= ADC_CR2_SWSTART;
 
     for (int i = 0; i != 1000000; i++)
     {

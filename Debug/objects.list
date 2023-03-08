@@ -6,4 +6,6 @@
 "./Drivers/CMSIS/src/system_stm32f1xx.o"
 "./Library/ClockControl/ClockControl.o"
 "./Library/DmaControl/DmaControl.o"
+"./Library/UartWrap/Uart.o"
+"./Library/UartWrap/Uart_it.o"
 "./Startup/startup_stm32f103c8tx.o"

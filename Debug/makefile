@@ -10,6 +10,7 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include Startup/subdir.mk
+-include Library/UartWrap/subdir.mk
 -include Library/DmaControl/subdir.mk
 -include Library/ClockControl/subdir.mk
 -include Drivers/CMSIS/src/subdir.mk
