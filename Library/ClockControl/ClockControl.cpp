@@ -91,7 +91,7 @@ void ClockControl::Set_APB2_Prescaler(unsigned short APB2_Prescaler_Value)
 		break;
 	default:
 		RCC->CFGR |= RCC_CFGR_PPRE2_DIV1;
-	}	
+	}
 }
 void ClockControl::Set_ADC_Prescaler(unsigned short ADC_Prescaler_Value)
 {
@@ -111,70 +111,69 @@ void ClockControl::Set_ADC_Prescaler(unsigned short ADC_Prescaler_Value)
 		break;
 	default:
 		RCC->CFGR |= RCC_CFGR_ADCPRE_DIV2;
-	}		
+	}
 }
 
 void ClockControl::Set_Mco_PLL_CLK()
 {
-  /*  Тактирование порта A  */
-  RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
-  // Output mode, max speed 50 MHz 
-  GPIOA->CRH |= GPIO_CRH_MODE8_1;
-  GPIOA->CRH |= GPIO_CRH_MODE8_0;
-  // Alternate function output Push-pull  
-  GPIOA->CRH |= GPIO_CRH_CNF8_1;
-  GPIOA->CRH &= ~GPIO_CRH_CNF8_0;
-  // Сначала устанавливаем все в ноль
-  RCC->CFGR &= ~RCC_CFGR_MCO_Msk;         
-  // PLL clock divided by 2 selected
-  RCC->CFGR |= RCC_CFGR_MCO_PLLCLK_DIV2; 
+	/*  Тактирование порта A  */
+	RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
+	// Output mode, max speed 50 MHz
+	GPIOA->CRH |= GPIO_CRH_MODE8_1;
+	GPIOA->CRH |= GPIO_CRH_MODE8_0;
+	// Alternate function output Push-pull
+	GPIOA->CRH |= GPIO_CRH_CNF8_1;
+	GPIOA->CRH &= ~GPIO_CRH_CNF8_0;
+	// Сначала устанавливаем все в ноль
+	RCC->CFGR &= ~RCC_CFGR_MCO_Msk;
+	// PLL clock divided by 2 selected
+	RCC->CFGR |= RCC_CFGR_MCO_PLLCLK_DIV2;
 }
 void ClockControl::Set_Mco_HSE_CLK()
 {
-  /*  Тактирование порта A  */
-  RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
-  // Output mode, max speed 50 MHz 
-  GPIOA->CRH |= GPIO_CRH_MODE8_1;
-  GPIOA->CRH |= GPIO_CRH_MODE8_0;
-  // Alternate function output Push-pull  
-  GPIOA->CRH |= GPIO_CRH_CNF8_1;
-  GPIOA->CRH &= ~GPIO_CRH_CNF8_0;
-  // Сначала устанавливаем все в ноль
-  RCC->CFGR &= ~RCC_CFGR_MCO_Msk;         
-  // HSE
-  RCC->CFGR |= RCC_CFGR_MCO_HSE; 
+	/*  Тактирование порта A  */
+	RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
+	// Output mode, max speed 50 MHz
+	GPIOA->CRH |= GPIO_CRH_MODE8_1;
+	GPIOA->CRH |= GPIO_CRH_MODE8_0;
+	// Alternate function output Push-pull
+	GPIOA->CRH |= GPIO_CRH_CNF8_1;
+	GPIOA->CRH &= ~GPIO_CRH_CNF8_0;
+	// Сначала устанавливаем все в ноль
+	RCC->CFGR &= ~RCC_CFGR_MCO_Msk;
+	// HSE
+	RCC->CFGR |= RCC_CFGR_MCO_HSE;
 }
 void ClockControl::Set_Mco_HSI_CLK()
 {
-  /*  Тактирование порта A  */
-  RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
-  // Output mode, max speed 50 MHz 
-  GPIOA->CRH |= GPIO_CRH_MODE8_1;
-  GPIOA->CRH |= GPIO_CRH_MODE8_0;
-  // Alternate function output Push-pull  
-  GPIOA->CRH |= GPIO_CRH_CNF8_1;
-  GPIOA->CRH &= ~GPIO_CRH_CNF8_0;
-  // Сначала устанавливаем все в ноль
-  RCC->CFGR &= ~RCC_CFGR_MCO_Msk;         
-  // HSI
-  RCC->CFGR |= RCC_CFGR_MCO_HSI; 
+	/*  Тактирование порта A  */
+	RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
+	// Output mode, max speed 50 MHz
+	GPIOA->CRH |= GPIO_CRH_MODE8_1;
+	GPIOA->CRH |= GPIO_CRH_MODE8_0;
+	// Alternate function output Push-pull
+	GPIOA->CRH |= GPIO_CRH_CNF8_1;
+	GPIOA->CRH &= ~GPIO_CRH_CNF8_0;
+	// Сначала устанавливаем все в ноль
+	RCC->CFGR &= ~RCC_CFGR_MCO_Msk;
+	// HSI
+	RCC->CFGR |= RCC_CFGR_MCO_HSI;
 }
 void ClockControl::Set_Mco_SYS_CLK()
 {
-  /*  Тактирование порта A  */
-  RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
-  // Output mode, max speed 50 MHz 
-  GPIOA->CRH |= GPIO_CRH_MODE8_1;
-  GPIOA->CRH |= GPIO_CRH_MODE8_0;
-  // Alternate function output Push-pull  
-  GPIOA->CRH |= GPIO_CRH_CNF8_1;
-  GPIOA->CRH &= ~GPIO_CRH_CNF8_0;
-  // Сначала устанавливаем все в ноль
-  RCC->CFGR &= ~RCC_CFGR_MCO_Msk;         
-  // SYS
-  RCC->CFGR |= RCC_CFGR_MCO_SYSCLK; 
+	/*  Тактирование порта A  */
+	RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
+	// Output mode, max speed 50 MHz
+	GPIOA->CRH |= GPIO_CRH_MODE8_1;
+	GPIOA->CRH |= GPIO_CRH_MODE8_0;
+	// Alternate function output Push-pull
+	GPIOA->CRH |= GPIO_CRH_CNF8_1;
+	GPIOA->CRH &= ~GPIO_CRH_CNF8_0;
+	// Сначала устанавливаем все в ноль
+	RCC->CFGR &= ~RCC_CFGR_MCO_Msk;
+	// SYS
+	RCC->CFGR |= RCC_CFGR_MCO_SYSCLK;
 }
-
 
 bool ClockControl::HSI::Start_HSI()
 {
@@ -242,7 +241,6 @@ void ClockControl::HSI::PLL::Clean_USBPRE()
 {
 	RCC->CFGR &= ~RCC_CFGR_USBPRE;
 }
-
 
 bool ClockControl::HSE::Start_HSE()
 {

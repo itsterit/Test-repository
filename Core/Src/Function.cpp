@@ -144,6 +144,7 @@ void Uart2_StrWrite(char Buf[100])
   {
     Uart2_Cond = 0;
     Uart2_Counter = 0;
+    Uart2_Len = 0;
 
     strcpy(Uart2_BufSend, Buf);
     Uart2_Len = strlen(Uart2_BufSend);

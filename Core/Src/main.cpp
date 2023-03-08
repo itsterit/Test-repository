@@ -22,13 +22,12 @@
 #include "stm32f1xx.h"
 #include "main.h"
 #include <ClockControl/ClockControl.h>
+#include <DmaControl/DmaControl.h>
 
 short Uart2_Cond = 1;
 short Uart2_Counter = 0;
 short Uart2_Len = 0;
 char Uart2_BufSend[100] = {0};
-
-char LibA[10] = {'A', '\n'};
 
 int main(void)
 {
@@ -67,44 +66,36 @@ int main(void)
   ClockControl::Set_APB2_Prescaler(1);
   ClockControl::Set_ADC_Prescaler(4);
 
-  Uart2_Ini(USART2, 24000000, 9600);
+  DMA1_Channel1->CNDTR = 0x00; // сколько кадров данных подлежит передаче
+  DMA1_Channel1->CPAR = 0x00;  // адрес памяти
+  DMA1_Channel1->CPAR = 0x00;  // адрес периферийного устройства
 
-  PinSet();
+  DMA_Config DMA_Ch1_cfg;
+  DMA_Ch1_cfg.MEM2MEM = MEM2MEM_Disabled;
+  DMA_Ch1_cfg.PL = PL_High;
+  DMA_Ch1_cfg.MSIZE = MSIZE_8bits;
+  DMA_Ch1_cfg.PSIZE = PSIZE_8bits;
+  DMA_Ch1_cfg.MINC = MINC_Disabled;
+  DMA_Ch1_cfg.PINC = PINC_Disabled;
+  DMA_Ch1_cfg.CIRC = CIRC_Disabled;
+  DMA_Ch1_cfg.DIR = DIR_From_Memory;
+  DMA_Ch1_cfg.TEIE = TEIE_Disabled;
+  DMA_Ch1_cfg.HTIE = HTIE_Disabled;
+  DMA_Ch1_cfg.TCIE = TCIE_Disabled;
+  DMA_Ch1_cfg.EN = EN_Disabled;
+  DmaControl Dma_Ch1(DMA1, DMA1_Channel1, &DMA_Ch1_cfg);
 
   /**
-   * @brief: Start DMA ini
+   * @brief: Start GPIO
    */
-  RCC->AHBENR |= RCC_AHBENR_DMA1EN;
-  DMA1->ISR = 0x00;                    // DMA interrupt status register
-  DMA1->IFCR = 0x00;                   // DMA interrupt flag clear register
-  
-  DMA1_Channel1->CCR = 0x00;
-  DMA1_Channel1->CCR |= (00 << DMA_CCR_MEM2MEM_Pos)  // Memory to memory mode disabled
-  | (00 << DMA_CCR_PL_Pos)                           // Channel priority level
-  | (00 << DMA_CCR_MSIZE_Pos)                        // Memory size
-  | (00 << DMA_CCR_MSIZE_Pos)                        // Memory size
-  | (00 << DMA_CCR_PSIZE_Pos)                        // Peripheral size
-  | (00 << DMA_CCR_MINC_Pos)                         // Memory increment mode
-  | (00 << DMA_CCR_PINC_Pos)                         // Peripheral increment mode
-  | (00 << DMA_CCR_CIRC_Pos)                         // Circular mode
-  | (00 << DMA_CCR_DIR_Pos)                          // Data transfer direction
-  | (00 << DMA_CCR_TEIE_Pos)                         // Transfer error interrupt enable
-  | (00 << DMA_CCR_HTIE_Pos)                         // Half transfer interrupt enable
-  | (00 << DMA_CCR_TCIE_Pos)                         // Transfer complete interrupt enable
-  | (00 << DMA_CCR_EN_Pos);                          // Channel enable
-
-  DMA1_Channel1->CNDTR = 0x00;                      // сколько кадров данных подлежит передаче 
-  DMA1_Channel1->CPAR  = 0x00;                      // адрес памяти
-  DMA1_Channel1->CPAR  = 0x00;                      // адрес периферийного устройства
-
+  PinSet();
+  Uart2_Ini(USART2, 24000000, 9600);
 
   while (1)
   {
     GPIOC->ODR ^= GPIO_ODR_ODR13;
 
-    USART2->SR = 0x00;
-    USART2->CR1 |= USART_CR1_TCIE;
-    USART2->DR = LibA[0];
+    Uart2_StrWrite("Hello\n\r");
 
     for (int i = 0; i != 1000000; i++)
     {

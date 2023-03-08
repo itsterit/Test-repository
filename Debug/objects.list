@@ -5,4 +5,5 @@
 "./Core/Src/sysmem.o"
 "./Drivers/CMSIS/src/system_stm32f1xx.o"
 "./Library/ClockControl/ClockControl.o"
+"./Library/DmaControl/DmaControl.o"
 "./Startup/startup_stm32f103c8tx.o"

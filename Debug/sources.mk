@@ -34,5 +34,6 @@ SUBDIRS := \
 Core/Src \
 Drivers/CMSIS/src \
 Library/ClockControl \
+Library/DmaControl \
 Startup \
 
