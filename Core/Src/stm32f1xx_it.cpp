@@ -20,34 +20,32 @@
 #include <string.h>
 #include "stm32f1xx.h"
 #include "main.h"
+#include <UartWrap/Uart.h>
 
-char Lib[10] = {'A', '\n'};
-
-void  ADC1_2_IRQHandler()
+#ifdef __cplusplus
+extern "C"
 {
-    if(ADC1->SR & ADC_SR_EOC)
-	{
-        GPIOC->ODR &= ~GPIO_ODR_ODR13;
-        i = (ADC1->DR)*3000 / 4096;
-        
-        //sprintf(buf, "i-> %d \n\r", i );
-    	//Uart2_StrWrite(buf);
+#endif
+
+    void ADC1_2_IRQHandler()
+    {
+        if (ADC1->SR & ADC_SR_EOC)
+        {
+            char buf[100];
+            sprintf(buf, " ADC1_2_IRQHandler-> %ld \n\r", (ADC1->DR) * 3000 / 4096);
+            Uart2_StrWrite(buf);
+        }
+
+        ADC1->SR = 0x00;
     }
 
-	ADC1->SR = 0x00;
-}
+    void TIM1_UP_IRQHandler(void)
+    {
+        GPIOC->ODR |= (GPIO_ODR_ODR13);
+        GPIOC->ODR &= ~(GPIO_ODR_ODR13);
+        TIM1->SR &= ~TIM_SR_UIF;
+    }
 
-void TIM1_UP_IRQHandler(void)
-{
-    GPIOC->ODR |=  (GPIO_ODR_ODR13);
-    GPIOC->ODR &= ~(GPIO_ODR_ODR13);
-    TIM1->SR &= ~ TIM_SR_UIF;
+#ifdef __cplusplus
 }
-
-void USART2_IRQHandler(void)
-{
-    USART2->SR = 0x00;
-    USART2->CR1 &= ~USART_CR1_TCIE;
-
-    GPIOC->ODR ^= GPIO_ODR_ODR13;
-}
+#endif

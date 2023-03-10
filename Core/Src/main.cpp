@@ -22,17 +22,13 @@
 #include "stm32f1xx.h"
 #include "main.h"
 #include <ClockControl/ClockControl.h>
+#include <DmaControl/DmaControl.h>
+#include <UartWrap/Uart.h>
 
-short Uart2_Cond        = 1;
-short Uart2_Counter     = 0;
-short Uart2_Len         = 0;
-char Uart2_BufSend[100] = {0};
-
-char LibA[10] = {'A', '\n'};
-
+int i = 0;
 int main(void)
-{ 
- /**
+{
+  /**
    * @brief   Start HSI clock
    *
    * @details Returns 1 if launch is successful
@@ -67,19 +63,31 @@ int main(void)
   ClockControl::Set_APB2_Prescaler(1);
   ClockControl::Set_ADC_Prescaler(4);
 
-  Uart2_Ini(USART2, 24000000, 9600);
-
   PinSet();
+  Uart2_Ini(USART2, 24000000, 9600);
+  ADC1_IN9_PB1_ini();
+
+  DmaControlConfig DMA_cfg;
+  DMA_cfg.MEM2MEM = MEM2MEM_Disabled;
+  DMA_cfg.PL      = PL_VeryHigh;
+  DMA_cfg.MSIZE   = MSIZE_16bits;
+  DMA_cfg.PSIZE   = PSIZE_16bits;
+  DMA_cfg.MINC    = MINC_Disabled;
+  DMA_cfg.PINC    = PINC_Disabled;
+  DMA_cfg.CIRC    = CIRC_Disabled;
+  DMA_cfg.DIR     = Read_From_Peripheral;
+  DMA_cfg.TEIE    = TEIE_Enabled;
+  DMA_cfg.HTIE    = HTIE_Disabled;
+  DMA_cfg.TCIE    = TCIE_Enabled;
+  DMA_cfg.EN      = EN_Enabled;
+  DmaControl Dma_Ch1(DMA1, DMA1_Channel1, &DMA_cfg, 1, (uint32_t)&i );
 
   while (1)
-  {    
-    GPIOC->ODR ^= GPIO_ODR_ODR13;    
-    
-    USART2->SR = 0x00;
-    USART2->CR1 |= USART_CR1_TCIE;
-    //USART2->DR = LibA[0];
+  {  
+    ADC1->CR2 |= ADC_CR2_ADON;
+    ADC1->CR2 |= ADC_CR2_SWSTART;
 
-    for (int i = 0; i != 1000000; i++)
+    for (int i = 0; i != 10000; i++)
     {
     }
   }
