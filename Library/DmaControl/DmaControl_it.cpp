@@ -16,7 +16,7 @@ extern "C"
 #endif
 
   void DMA1_Channel1_IRQHandler(void)
-  {    
+  {
     char buf[500];
     sprintf(buf, " DMAChannel1_IRQHandler-> %d \n\r", (i)*3000 / 4096);
     Uart2_StrWrite(buf);
