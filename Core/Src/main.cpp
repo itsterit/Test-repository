@@ -63,40 +63,29 @@ int main(void)
   ClockControl::Set_APB2_Prescaler(1);
   ClockControl::Set_ADC_Prescaler(4);
 
-  /*
-  DMA_Config DMA_Ch1_cfg;
-  DMA_Ch1_cfg.MEM2MEM = MEM2MEM_Disabled;
-  DMA_Ch1_cfg.PL      = PL_VeryHigh;
-  DMA_Ch1_cfg.MSIZE   = MSIZE_16bits;
-  DMA_Ch1_cfg.PSIZE   = PSIZE_16bits;
-  DMA_Ch1_cfg.MINC    = MINC_Disabled;
-  DMA_Ch1_cfg.PINC    = PINC_Disabled;
-  DMA_Ch1_cfg.CIRC    = CIRC_Enabled;
-  DMA_Ch1_cfg.DIR     = Read_From_Peripheral;
-  DMA_Ch1_cfg.TEIE    = TEIE_Enabled;
-  DMA_Ch1_cfg.HTIE    = HTIE_Disabled;
-  DMA_Ch1_cfg.TCIE    = TCIE_Enabled;
-  DMA_Ch1_cfg.EN      = EN_Enabled;
-  DmaControl Dma_Ch1(DMA1, DMA1_Channel1, &DMA_Ch1_cfg);
-  */
-
   PinSet();
   Uart2_Ini(USART2, 24000000, 9600);
   ADC1_IN9_PB1_ini();
 
-  while (1)
-  {
-    RCC->AHBENR |= RCC_AHBENR_DMA1EN;
-    DMA1_Channel1->CNDTR = 1;                  // сколько кадров данных подлежит передаче
-    DMA1_Channel1->CMAR = (uint32_t)&i;        // адрес памяти
-    DMA1_Channel1->CPAR = (uint32_t)&ADC1->DR; // Загружаем адрес регистра DR
-    DMA1_Channel1->CCR |= DMA_CCR_PSIZE_0    // размерность данных периферии 16 бит
-                          | DMA_CCR_MSIZE_0; // размерность данных памяти 16 bit
-    NVIC_EnableIRQ(DMA1_Channel1_IRQn);
+  DmaControlConfig DMA_cfg;
+  DMA_cfg.MEM2MEM = MEM2MEM_Disabled;
+  DMA_cfg.PL      = PL_VeryHigh;
+  DMA_cfg.MSIZE   = MSIZE_16bits;
+  DMA_cfg.PSIZE   = PSIZE_16bits;
+  DMA_cfg.MINC    = MINC_Disabled;
+  DMA_cfg.PINC    = PINC_Disabled;
+  DMA_cfg.CIRC    = CIRC_Disabled;
+  DMA_cfg.DIR     = Read_From_Peripheral;
+  DMA_cfg.TEIE    = TEIE_Enabled;
+  DMA_cfg.HTIE    = HTIE_Disabled;
+  DMA_cfg.TCIE    = TCIE_Enabled;
+  DMA_cfg.EN      = EN_Enabled;
+  DmaControl Dma_Ch1(DMA1, DMA1_Channel1, &DMA_cfg, 1, (uint32_t)&i );
 
+  while (1)
+  {  
     ADC1->CR2 |= ADC_CR2_ADON;
     ADC1->CR2 |= ADC_CR2_SWSTART;
-    DMA1_Channel1->CCR |= DMA_CCR_TCIE | DMA_CCR_TEIE | DMA_CCR_EN;
 
     for (int i = 0; i != 10000; i++)
     {
