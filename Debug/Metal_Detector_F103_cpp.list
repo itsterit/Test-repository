@@ -384,8 +384,8 @@ int main(void)
   DMA_cfg.PINC    = PINC_Disabled;
  8000334:	2300      	movs	r3, #0
  8000336:	737b      	strb	r3, [r7, #13]
-  DMA_cfg.CIRC    = CIRC_Disabled;
- 8000338:	2300      	movs	r3, #0
+  DMA_cfg.CIRC    = CIRC_Enabled;
+ 8000338:	2301      	movs	r3, #1
  800033a:	73bb      	strb	r3, [r7, #14]
   DMA_cfg.DIR     = Read_From_Peripheral;
  800033c:	2300      	movs	r3, #0

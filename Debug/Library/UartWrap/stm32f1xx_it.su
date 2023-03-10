@@ -1,0 +1,3 @@
+../Library/UartWrap/stm32f1xx_it.cpp:29:10:void ADC1_2_IRQHandler()	4	static
+../Library/UartWrap/stm32f1xx_it.cpp:43:10:void TIM1_UP_IRQHandler()	4	static
+../Library/UartWrap/stm32f1xx_it.cpp:50:10:void USART2_IRQHandler()	4	static

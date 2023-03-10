@@ -74,7 +74,7 @@ int main(void)
   DMA_cfg.PSIZE   = PSIZE_16bits;
   DMA_cfg.MINC    = MINC_Disabled;
   DMA_cfg.PINC    = PINC_Disabled;
-  DMA_cfg.CIRC    = CIRC_Disabled;
+  DMA_cfg.CIRC    = CIRC_Enabled;
   DMA_cfg.DIR     = Read_From_Peripheral;
   DMA_cfg.TEIE    = TEIE_Enabled;
   DMA_cfg.HTIE    = HTIE_Disabled;
