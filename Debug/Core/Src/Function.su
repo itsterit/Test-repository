@@ -1,0 +1,4 @@
+../Core/Src/Function.cpp:24:6:void ADC1_IN9_PB1_ini()	16	static
+../Core/Src/Function.cpp:75:6:void McoSet()	4	static
+../Core/Src/Function.cpp:89:6:void ClockSet()	4	static
+../Core/Src/Function.cpp:145:6:void PinSet()	4	static

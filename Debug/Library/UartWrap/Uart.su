@@ -1,0 +1,3 @@
+C:/Users/itste/STM32CubeIDE/workspace_1.9.0/Metal_Detector_F103_cpp/Drivers/CMSIS/inc/core_cm3.h:1511:22:void __NVIC_EnableIRQ(IRQn_Type)	16	static
+../Library/UartWrap/Uart.cpp:29:6:void Uart2_StrWrite(char*)	16	static
+../Library/UartWrap/Uart.cpp:45:6:void Uart2_Ini(USART_TypeDef*, long int, int)	24	static

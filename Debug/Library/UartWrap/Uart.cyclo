@@ -1,0 +1,3 @@
+core_cm3.h:1511:22:void __NVIC_EnableIRQ(IRQn_Type)	2
+Uart.cpp:29:6:void Uart2_StrWrite(char*)	2
+Uart.cpp:45:6:void Uart2_Ini(USART_TypeDef*, long int, int)	1

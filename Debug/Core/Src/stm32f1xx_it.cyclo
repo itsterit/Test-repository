@@ -1,0 +1,2 @@
+stm32f1xx_it.cpp:30:10:void ADC1_2_IRQHandler()	2
+stm32f1xx_it.cpp:42:10:void TIM1_UP_IRQHandler()	1
