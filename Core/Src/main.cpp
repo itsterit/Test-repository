@@ -26,6 +26,8 @@
 #include <UartWrap/Uart.h>
 
 int i = 0;
+uint16_t src[10] = {0};
+
 int main(void)
 {
   /**
@@ -72,7 +74,7 @@ int main(void)
   DMA_cfg.PL      = PL_VeryHigh;
   DMA_cfg.MSIZE   = MSIZE_16bits;
   DMA_cfg.PSIZE   = PSIZE_16bits;
-  DMA_cfg.MINC    = MINC_Disabled;
+  DMA_cfg.MINC    = MINC_Enabled;
   DMA_cfg.PINC    = PINC_Disabled;
   DMA_cfg.CIRC    = CIRC_Enabled;
   DMA_cfg.DIR     = Read_From_Peripheral;
@@ -80,14 +82,14 @@ int main(void)
   DMA_cfg.HTIE    = HTIE_Disabled;
   DMA_cfg.TCIE    = TCIE_Enabled;
   DMA_cfg.EN      = EN_Enabled;
-  DmaControl Dma_Ch1(DMA1, DMA1_Channel1, &DMA_cfg, 1, (uint32_t)&i );
+  DmaControl Dma_Ch1(DMA1, DMA1_Channel1, &DMA_cfg, 5, (uint32_t*)&src, (uint32_t*)&ADC1->DR);
 
   while (1)
   {  
     ADC1->CR2 |= ADC_CR2_ADON;
     ADC1->CR2 |= ADC_CR2_SWSTART;
 
-    for (int i = 0; i != 10000; i++)
+    for (int i = 0; i != 1000000; i++)
     {
     }
   }

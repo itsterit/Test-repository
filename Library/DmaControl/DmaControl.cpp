@@ -10,13 +10,13 @@
 #include <DmaControl/DmaControl.h>
 #include "main.h"
 
-DmaControl::DmaControl(DMA_TypeDef *DMA_Num, DMA_Channel_TypeDef *DMA_Channel,  DmaControlConfig *cfg, uint16_t Counter, uint32_t DataPointer)
+DmaControl::DmaControl(DMA_TypeDef *DMA_Num, DMA_Channel_TypeDef *DMA_Channel, DmaControlConfig *cfg, uint16_t Counter, uint32_t *DataPointer, uint32_t *PeripheryPointer)
 {   
   RCC->AHBENR |= RCC_AHBENR_DMA1EN;
 
-  DMA_Channel->CNDTR = Counter;                 // кадры для передачи
-  DMA_Channel->CMAR  = (uint32_t)DataPointer;   // адрес памяти
-  DMA_Channel->CPAR  = (uint32_t)&ADC1->DR;     // адрес периферии
+  DMA_Channel->CNDTR = Counter;                    // кадры для передачи
+  DMA_Channel->CMAR  = (uint32_t)DataPointer;      // адрес памяти
+  DMA_Channel->CPAR  = (uint32_t)PeripheryPointer; // адрес периферии
 
   DMA_Num->IFCR |= 
        DMA_IFCR_CTEIF1  // Channel 1 transfer error clear

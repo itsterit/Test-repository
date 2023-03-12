@@ -17,8 +17,21 @@ extern "C"
 
   void DMA1_Channel1_IRQHandler(void)
   {
-    char buf[500];
-    sprintf(buf, " DMAChannel1_IRQHandler-> %d \n\r", (i)*3000 / 4096);
+    char buf[500] = {0};
+    sprintf
+    (buf, 
+      " \n\r"
+      " Val_0 -> %d \n\r"
+      " Val_1 -> %d \n\r"
+      " Val_2 -> %d \n\r"
+      " Val_3 -> %d \n\r"
+      " Val_4 -> %d \n\r",
+     (src[0])*3000 / 4096,
+     (src[1])*3000 / 4096,
+     (src[2])*3000 / 4096,
+     (src[3])*3000 / 4096,
+     (src[4])*3000 / 4096
+    );
     Uart2_StrWrite(buf);
 
     DMA1->IFCR =

@@ -1,1 +1,1 @@
-../Library/DmaControl/DmaControl_it.cpp:18:8:void DMA1_Channel1_IRQHandler()	512	static
+../Library/DmaControl/DmaControl_it.cpp:18:8:void DMA1_Channel1_IRQHandler()	536	static

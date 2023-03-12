@@ -1,2 +1,2 @@
 core_cm3.h:1511:22:void __NVIC_EnableIRQ(IRQn_Type)	2
-DmaControl.cpp:13:1:DmaControl::DmaControl(DMA_TypeDef*, DMA_Channel_TypeDef*, DmaControlConfig*, uint16_t, uint32_t)	1
+DmaControl.cpp:13:1:DmaControl::DmaControl(DMA_TypeDef*, DMA_Channel_TypeDef*, DmaControlConfig*, uint16_t, uint32_t*, uint32_t*)	1

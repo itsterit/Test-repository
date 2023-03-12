@@ -20,6 +20,7 @@
 	#include "stm32f1xx.h"
 
 	extern int i;
+	extern uint16_t src[10];
 	extern char buf[10];
 
 	void ADC1_IN9_PB1_ini();

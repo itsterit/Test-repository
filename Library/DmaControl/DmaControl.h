@@ -11,6 +11,7 @@
 #include <stdint.h>
 #include "stm32f1xx.h"
 
+
 /** Memory to memory mode */
 typedef enum
 {
@@ -120,7 +121,7 @@ typedef struct
 class DmaControl
 {
 public:
-    DmaControl(DMA_TypeDef *DMA_Num, DMA_Channel_TypeDef *DMA_Channel,  DmaControlConfig *cfg, uint16_t Counter, uint32_t DataPointer);   
+    DmaControl(DMA_TypeDef *DMA_Num, DMA_Channel_TypeDef *DMA_Channel, DmaControlConfig *cfg, uint16_t Counter, uint32_t *DataPointer, uint32_t *PeripheryPointer);
 };
 
 #endif /* DMACONTROL_DMACONTROL_H_ */
